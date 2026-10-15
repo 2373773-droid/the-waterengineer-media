@@ -1,25 +1,21 @@
 # Suv tozalash usullari | 3-qism: Kimyoviy tozalash
 
 Planned publish: Saturday 2026-10-17, 12:00 Tashkent (16:00 Seoul), Reel.
-Target length: ~55–60 s (same as part 2).
+Target length: ~40 s.
 
-## Narration (for VoiceLab)
+## Narration (for VoiceLab) — short version, ~40 s
 
-Kranni ochganingizda suvdan sal xlor hidi kelganini sezganmisiz? Ko‘pchilik buni yomon belgi deb o‘ylaydi. Aslida bu suvni yo‘lda qo‘riqlab kelayotgan himoyachi ekan.
+Kranni ochganingizda xlor hidini sezganmisiz? Bu yomon belgi emas, suvni yo‘lda qo‘riqlab kelayotgan himoyachi ekan.
 
-Lekin xlorgacha suv yana bitta kimyoviy bosqichdan o‘tadi.
+Biologik tozalashdan keyin ham suvda juda mayda zarrachalar qoladi. Ular bir-birini itarib, cho‘kmasdan suzib yuraveradi.
 
-Biologik tozalashdan keyin ham suvda juda mayda zarrachalar qoladi. Ularning hammasi manfiy zaryadli, shuning uchun bir-birini itarib, cho‘kmasdan suzib yuraveradi.
+Shunda suvga alyuminiy yoki temir tuzi qo‘shiladi. Zarrachalar bir-biriga yopishib, kattalashadi va tubga cho‘kadi. Buni koagulyatsiya deyishadi.
 
-Shu yerda koagulyatsiya ishga tushadi. Suvga alyuminiy yoki temir tuzi qo‘shiladi. Ular zaryadni neytrallaydi va zarrachalar bir-biriga yopisha boshlaydi.
+Oxirida xlor qolgan mikroblarni yo‘q qiladi.
 
-Keyin suv sekin aralashtiriladi. Mayda bo‘lakchalar kattalashib, paxtaga o‘xshash floklarga aylanadi, og‘irlashib tubga cho‘kadi.
+Minusi ham bor: reagentlar pul turadi va ko‘p chiqindi loyqa hosil bo‘ladi.
 
-Oxirida dezinfeksiya. Xlor qolgan mikroblarni yo‘q qiladi. Uyingizgacha yetib kelgan suvda ham oz miqdorda xlor qolishi kerak: Jahon sog‘liqni saqlash tashkiloti kamida litriga 0,2 milligramm tavsiya qiladi.
-
-Faqat kimyoviy usulning ham minusi bor: reagentlar pul turadi va ko‘p loyqa chiqindi hosil bo‘ladi.
-
-Eng mayda narsalarni esa faqat membranalar ushlay oladi. Keyingi, 4-qism membranali tozalash haqida bo‘ladi.
+Keyingi qism membranali tozalash haqida bo‘ladi.
 
 ## Scenes (same style as part 2, subtle violet tint for part 3)
 
