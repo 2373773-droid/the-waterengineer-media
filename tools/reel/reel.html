@@ -1,0 +1,493 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Inter;font-weight:500;src:url(node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}
+@font-face{font-family:Inter;font-weight:900;src:url(node_modules/@fontsource/inter/files/inter-latin-900-normal.woff2)}
+html,body{margin:0;background:#000}
+canvas{display:block}
+</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script src="data.js"></script>
+<script>
+const W = 1080, H = 1920, END = 51.3;
+const c = document.getElementById('c'), ctx = c.getContext('2d');
+
+// ---------- palette: same underwater world as part 2, subtle violet tint for part 3 ----------
+const P = {
+  top: '#1e4250', mid: '#0f2430', bot: '#03080b',
+  ray: '175,205,235', haze: '150,170,235',
+  accent: '#B9AAFF', accentGlow: 'rgba(150,130,255,0.85)',
+  title: '#F2F0FF', sub: 'rgba(222,224,242,0.85)',
+  steel1: '#DCE0EA', steel2: '#7E8597',
+  waterTop: 'rgba(110,175,205,0.88)', waterBot: 'rgba(36,82,120,0.94)',
+  dirt: '#A88661', dirtHi: '#D2B48C',
+  cl: '#CFEA72', clGlow: 'rgba(200,235,110,0.9)',
+  microbe: 'rgba(232,150,196,0.9)', microbeEdge: '#F6C6E0',
+};
+
+// ---------- helpers ----------
+function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const ease = k => (k = clamp(k), k * k * (3 - 2 * k));
+const easeOut = k => (k = clamp(k), 1 - Math.pow(1 - k, 3));
+const easeBack = k => { k = clamp(k); const s = 1.70158; return 1 + (s + 1) * Math.pow(k - 1, 3) + s * Math.pow(k - 1, 2); };
+const appear = (t, t0, d = 0.45) => clamp((t - t0) / d);
+
+function rr(x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
+
+function text(str, x, y, o = {}) {
+  const size = o.size || 60, weight = o.weight || 800;
+  ctx.save();
+  ctx.font = `${weight} ${size}px Inter`;
+  ctx.textAlign = o.align || 'center'; ctx.textBaseline = 'alphabetic';
+  if (o.maxW) { const m = ctx.measureText(str).width; if (m > o.maxW) { const s2 = size * o.maxW / m; ctx.font = `${weight} ${s2}px Inter`; } }
+  ctx.globalAlpha *= (o.alpha == null ? 1 : o.alpha);
+  if (o.glow) { ctx.shadowColor = o.glow; ctx.shadowBlur = o.blur || 34; ctx.fillStyle = o.color || '#fff'; ctx.fillText(str, x, y); ctx.shadowBlur = (o.blur || 34) * 0.4; ctx.fillText(str, x, y); }
+  if (o.shadow) { ctx.shadowColor = o.shadow; ctx.shadowBlur = 14; ctx.shadowOffsetY = 3; }
+  ctx.fillStyle = o.color || '#fff'; ctx.fillText(str, x, y);
+  ctx.restore();
+}
+
+// ---------- background ----------
+const R0 = rng(7);
+const rays = Array.from({ length: 8 }, (_, i) => ({ x: 60 + i * 135 + R0() * 60, w: 60 + R0() * 120, a: 0.035 + R0() * 0.05, ph: R0() * 6, sk: 120 + R0() * 120 }));
+const blobs = Array.from({ length: 7 }, () => ({ x: R0() * W, y: R0() * H * 0.8, r: 260 + R0() * 260, vx: (R0() - .5) * 14, vy: (R0() - .5) * 10, ph: R0() * 6 }));
+const dust = Array.from({ length: 90 }, () => ({ x: R0() * W, y: R0() * H, r: 0.8 + R0() * 2.2, v: 6 + R0() * 18, a: 0.12 + R0() * 0.35, ph: R0() * 6 }));
+
+function background(t) {
+  let g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, P.top); g.addColorStop(0.45, P.mid); g.addColorStop(1, P.bot);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  // soft haze blobs (caustic feel)
+  for (const b of blobs) {
+    const x = (b.x + b.vx * t + W) % (W + 400) - 200, y = b.y + b.vy * t + Math.sin(t * 0.4 + b.ph) * 30;
+    const rg = ctx.createRadialGradient(x, y, 0, x, y, b.r);
+    rg.addColorStop(0, `rgba(${P.haze},0.07)`); rg.addColorStop(1, `rgba(${P.haze},0)`);
+    ctx.fillStyle = rg; ctx.fillRect(x - b.r, y - b.r, b.r * 2, b.r * 2);
+  }
+  // light rays
+  ctx.save(); ctx.globalCompositeOperation = 'lighter';
+  for (const r of rays) {
+    const sway = Math.sin(t * 0.35 + r.ph) * 40, x0 = r.x + sway;
+    const lg = ctx.createLinearGradient(0, 0, 0, 1500);
+    lg.addColorStop(0, `rgba(${P.ray},${r.a * (0.75 + 0.25 * Math.sin(t * 0.8 + r.ph))})`); lg.addColorStop(1, `rgba(${P.ray},0)`);
+    ctx.fillStyle = lg; ctx.beginPath();
+    ctx.moveTo(x0, -20); ctx.lineTo(x0 + r.w, -20); ctx.lineTo(x0 + r.w + r.sk, 1500); ctx.lineTo(x0 + r.sk - r.w * 0.3, 1500); ctx.closePath(); ctx.fill();
+  }
+  ctx.restore();
+  // dust
+  for (const d of dust) {
+    const y = ((d.y - d.v * t) % H + H) % H, x = d.x + Math.sin(t * 0.5 + d.ph) * 12;
+    ctx.fillStyle = `rgba(205,225,240,${d.a})`; ctx.beginPath(); ctx.arc(x, y, d.r, 0, 7); ctx.fill();
+  }
+  // bottom vignette
+  g = ctx.createLinearGradient(0, H * 0.62, 0, H); g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, 'rgba(0,0,0,0.55)');
+  ctx.fillStyle = g; ctx.fillRect(0, H * 0.62, W, H * 0.38);
+}
+
+function surfaceLines(t, a) {
+  ctx.save(); ctx.globalAlpha = a; ctx.strokeStyle = 'rgba(210,215,255,0.35)'; ctx.lineWidth = 2.5;
+  for (let k = 0; k < 3; k++) {
+    ctx.beginPath();
+    for (let x = 0; x <= W; x += 12) { const y = 205 + k * 26 + Math.sin(x / 90 + t * 1.3 + k) * 6; x ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// ---------- title block (top) ----------
+function titleBlock(t, t0, title, sub, o = {}) {
+  const k = easeOut(appear(t, t0, 0.5)), y = o.y || 375;
+  ctx.save(); ctx.globalAlpha *= k; ctx.translate(0, (1 - k) * 18);
+  text(title, W / 2, y, { size: o.size || 92, weight: 900, color: P.title, glow: P.accentGlow, maxW: 980 });
+  ctx.fillStyle = P.accent; ctx.globalAlpha *= 0.9; rr(W / 2 - 60, y + 30, 120, 5, 2.5); ctx.fill(); ctx.globalAlpha /= 0.9;
+  if (sub) text(sub, W / 2, y + 92, { size: 40, weight: 500, color: P.sub, maxW: 960 });
+  ctx.restore();
+}
+function subSwap(t, tSwap, a, b, t0, y = 467) { // crossfade subtitle text
+  const k = ease((t - tSwap) / 0.3);
+  ctx.save(); ctx.globalAlpha *= easeOut(appear(t, t0, 0.5));
+  if (k < 1) text(a, W / 2, y, { size: 40, weight: 500, color: P.sub, alpha: 1 - k, maxW: 960 });
+  if (k > 0) text(b, W / 2, y, { size: 40, weight: 500, color: P.sub, alpha: k, maxW: 960 });
+  ctx.restore();
+}
+
+// ---------- illustrations ----------
+function flask(cx, cy, s, t) {
+  ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+  const body = () => { ctx.beginPath(); ctx.moveTo(-30, -150); ctx.lineTo(-30, -55); ctx.lineTo(-125, 92); ctx.quadraticCurveTo(-132, 112, -110, 112); ctx.lineTo(110, 112); ctx.quadraticCurveTo(132, 112, 125, 92); ctx.lineTo(30, -55); ctx.lineTo(30, -150); ctx.closePath(); };
+  ctx.save(); body(); ctx.clip();
+  const ly = 15 + Math.sin(t * 2) * 3;
+  const lg = ctx.createLinearGradient(0, ly, 0, 112); lg.addColorStop(0, 'rgba(185,170,255,0.75)'); lg.addColorStop(1, 'rgba(120,100,230,0.85)');
+  ctx.fillStyle = lg; ctx.beginPath(); ctx.moveTo(-140, 120);
+  for (let x = -140; x <= 140; x += 10) ctx.lineTo(x, ly + Math.sin(x / 22 + t * 3) * 4);
+  ctx.lineTo(140, 120); ctx.closePath(); ctx.fill();
+  const R = rng(3);
+  for (let i = 0; i < 9; i++) { const bx = -70 + R() * 140, sp = 25 + R() * 30, by = 108 - ((t * sp + R() * 100) % 90); ctx.fillStyle = 'rgba(255,255,255,0.55)'; ctx.beginPath(); ctx.arc(bx, by, 3 + R() * 3, 0, 7); ctx.fill(); }
+  ctx.restore();
+  body(); ctx.lineJoin = 'round'; ctx.strokeStyle = 'rgba(236,236,255,0.92)'; ctx.lineWidth = 7; ctx.shadowColor = P.accentGlow; ctx.shadowBlur = 22; ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(-44, -150); ctx.lineTo(44, -150); ctx.stroke();
+  ctx.restore();
+}
+
+function faucet(x, y, s) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  const mg = ctx.createLinearGradient(0, -40, 0, 40); mg.addColorStop(0, P.steel1); mg.addColorStop(1, P.steel2);
+  ctx.fillStyle = mg;
+  rr(-330, -34, 300, 68, 18); ctx.fill();                     // horizontal pipe
+  rr(-360, -60, 40, 120, 10); ctx.fill();                     // wall flange
+  ctx.beginPath(); ctx.moveTo(-40, -34); ctx.quadraticCurveTo(50, -34, 50, 40); ctx.lineTo(50, 92); ctx.lineTo(-10, 92); ctx.lineTo(-10, 40); ctx.quadraticCurveTo(-10, 30, -40, 34); ctx.closePath(); ctx.fill(); // spout
+  rr(-205, -92, 30, 60, 8); ctx.fill(); rr(-250, -112, 120, 30, 15); ctx.fill(); // handle
+  ctx.fillStyle = 'rgba(255,255,255,0.35)'; rr(-320, -26, 270, 10, 5); ctx.fill();
+  ctx.restore();
+}
+
+function glass(cx, top, t, fill = 0.7) {
+  const wT = 270, wB = 220, h = 320;
+  const path = () => { ctx.beginPath(); ctx.moveTo(cx - wT / 2, top); ctx.lineTo(cx - wB / 2, top + h); ctx.lineTo(cx + wB / 2, top + h); ctx.lineTo(cx + wT / 2, top); };
+  ctx.save(); path(); ctx.closePath(); ctx.clip();
+  const wy = top + h * (1 - fill);
+  const g = ctx.createLinearGradient(0, wy, 0, top + h); g.addColorStop(0, P.waterTop); g.addColorStop(1, P.waterBot);
+  ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(cx - 200, top + h + 10);
+  for (let x = cx - 200; x <= cx + 200; x += 10) ctx.lineTo(x, wy + Math.sin(x / 25 + t * 6) * 4);
+  ctx.lineTo(cx + 200, top + h + 10); ctx.closePath(); ctx.fill();
+  ctx.restore();
+  path(); ctx.strokeStyle = 'rgba(236,238,255,0.85)'; ctx.lineWidth = 6; ctx.lineJoin = 'round'; ctx.stroke();
+  ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.lineWidth = 8; ctx.beginPath(); ctx.moveTo(cx - wT / 2 + 26, top + 30); ctx.lineTo(cx - wB / 2 + 22, top + h - 30); ctx.stroke();
+}
+
+function stream(x, y0, y1, t, a = 1) {
+  ctx.save(); ctx.globalAlpha *= a;
+  const g = ctx.createLinearGradient(x - 14, 0, x + 14, 0); g.addColorStop(0, 'rgba(150,200,235,0.55)'); g.addColorStop(0.5, 'rgba(230,245,255,0.9)'); g.addColorStop(1, 'rgba(150,200,235,0.55)');
+  ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(x - 13, y0);
+  for (let y = y0; y <= y1; y += 10) ctx.lineTo(x - 11 + Math.sin(y / 30 - t * 14) * 1.6, y);
+  for (let y = y1; y >= y0; y -= 10) ctx.lineTo(x + 11 + Math.sin(y / 30 - t * 14 + 1) * 1.6, y);
+  ctx.closePath(); ctx.fill(); ctx.restore();
+}
+
+function clWisp(x, y, t, seed, a) {
+  const R = rng(seed);
+  for (let i = 0; i < 7; i++) {
+    const ph = R() * 10, sp = 40 + R() * 40, life = ((t * sp / 260 + R()) % 1);
+    const px = x + (R() - .5) * 180 + Math.sin(t * 1.4 + ph) * 26, py = y - life * 300;
+    const al = a * Math.sin(life * Math.PI) * 0.85;
+    ctx.save(); ctx.globalAlpha *= al; ctx.strokeStyle = P.cl; ctx.lineWidth = 3; ctx.shadowColor = P.clGlow; ctx.shadowBlur = 12;
+    ctx.beginPath(); for (let k = 0; k < 18; k++) { const yy = py + k * 5, xx = px + Math.sin(k / 3 + t * 3 + ph) * 10; k ? ctx.lineTo(xx, yy) : ctx.moveTo(xx, yy); } ctx.stroke();
+    if (i % 2 === 0) text('Cl', px + 26, py + 10, { size: 34, weight: 800, color: P.cl, glow: P.clGlow, blur: 14 });
+    ctx.restore();
+  }
+}
+
+function shield(cx, cy, s, a) {
+  ctx.save(); ctx.globalAlpha *= a; ctx.translate(cx, cy); ctx.scale(s, s);
+  ctx.beginPath(); ctx.moveTo(0, -230); ctx.quadraticCurveTo(110, -170, 200, -175); ctx.quadraticCurveTo(205, 110, 0, 240); ctx.quadraticCurveTo(-205, 110, -200, -175); ctx.quadraticCurveTo(-110, -170, 0, -230); ctx.closePath();
+  ctx.fillStyle = 'rgba(160,140,255,0.10)'; ctx.fill();
+  ctx.strokeStyle = P.accent; ctx.lineWidth = 9; ctx.shadowColor = P.accentGlow; ctx.shadowBlur = 30; ctx.stroke();
+  ctx.restore();
+}
+
+function lens(cx, cy, r, t, inside) {
+  // handle
+  ctx.save(); ctx.translate(cx, cy); ctx.rotate(Math.PI * 0.75);
+  const hg = ctx.createLinearGradient(0, -24, 0, 24); hg.addColorStop(0, '#9aa1b3'); hg.addColorStop(0.5, '#5b6274'); hg.addColorStop(1, '#3a404f');
+  ctx.fillStyle = hg; rr(r + 4, -22, 250, 44, 20); ctx.fill(); ctx.restore();
+  // glass + content
+  ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, 7); ctx.clip();
+  const g = ctx.createRadialGradient(cx - r * 0.3, cy - r * 0.3, r * 0.1, cx, cy, r);
+  g.addColorStop(0, 'rgba(130,205,225,0.95)'); g.addColorStop(1, 'rgba(38,110,140,0.97)');
+  ctx.fillStyle = g; ctx.fillRect(cx - r, cy - r, 2 * r, 2 * r);
+  ctx.strokeStyle = 'rgba(255,255,255,0.13)'; ctx.lineWidth = 5;
+  for (let k = 0; k < 9; k++) { ctx.beginPath(); for (let a = 0; a < 7; a += 0.3) { const rr2 = 30 + k * 34 + Math.sin(a * 3 + t * 1.1 + k) * 14; const x = cx - 80 + k * 22 + Math.cos(a) * rr2, y = cy - 60 + k * 15 + Math.sin(a) * rr2 * 0.6; a ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.stroke(); }
+  inside(cx, cy, r);
+  ctx.restore();
+  // rim
+  const rg = ctx.createLinearGradient(cx - r, cy - r, cx + r, cy + r); rg.addColorStop(0, P.steel1); rg.addColorStop(1, P.steel2);
+  ctx.strokeStyle = rg; ctx.lineWidth = 26; ctx.beginPath(); ctx.arc(cx, cy, r + 10, 0, 7); ctx.stroke();
+  ctx.strokeStyle = 'rgba(255,255,255,0.55)'; ctx.lineWidth = 6; ctx.beginPath(); ctx.arc(cx, cy, r + 10, Math.PI * 1.1, Math.PI * 1.45); ctx.stroke();
+}
+
+function particle(x, y, r, minus = 1) {
+  const g = ctx.createRadialGradient(x - r * 0.3, y - r * 0.3, 1, x, y, r);
+  g.addColorStop(0, P.dirtHi); g.addColorStop(1, P.dirt);
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill();
+  if (minus > 0.02 && r >= 9) { ctx.save(); ctx.globalAlpha *= minus; ctx.fillStyle = '#fff'; ctx.fillRect(x - r * 0.5, y - 2, r, 4); ctx.restore(); }
+}
+
+function floc(x, y, size, seed) {
+  const R = rng(seed);
+  for (let i = 0; i < 9; i++) {
+    const a = R() * 7, d = R() * size * 0.6, rr2 = size * (0.25 + R() * 0.3);
+    ctx.fillStyle = `rgba(${150 + R() * 30 | 0},${118 + R() * 20 | 0},${82 + R() * 20 | 0},0.92)`;
+    ctx.beginPath(); ctx.arc(x + Math.cos(a) * d, y + Math.sin(a) * d, rr2, 0, 7); ctx.fill();
+  }
+}
+
+function tank(x, y, w, h, t, inside, waterTint = 0) {
+  ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
+  const wy = y + 40;
+  const g = ctx.createLinearGradient(0, wy, 0, y + h);
+  g.addColorStop(0, `rgba(${lerp(110, 140, waterTint)},${lerp(175, 215, waterTint)},${lerp(205, 230, waterTint)},0.88)`); g.addColorStop(1, P.waterBot);
+  ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(x, y + h);
+  for (let xx = x; xx <= x + w; xx += 12) ctx.lineTo(xx, wy + Math.sin(xx / 40 + t * 3) * 5);
+  ctx.lineTo(x + w, y + h); ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.10)'; ctx.lineWidth = 4;
+  for (let k = 0; k < 6; k++) { ctx.beginPath(); for (let xx = x; xx <= x + w; xx += 20) { const yy = wy + 70 + k * 70 + Math.sin(xx / 70 + t * 1.2 + k) * 12; xx === x ? ctx.moveTo(xx, yy) : ctx.lineTo(xx, yy); } ctx.stroke(); }
+  inside(wy);
+  ctx.restore();
+  ctx.strokeStyle = '#9aa2b2'; ctx.lineWidth = 14; ctx.lineJoin = 'round';
+  ctx.beginPath(); ctx.moveTo(x - 7, y - 10); ctx.lineTo(x - 7, y + h + 7); ctx.lineTo(x + w + 7, y + h + 7); ctx.lineTo(x + w + 7, y - 10); ctx.stroke();
+}
+
+function mixer(cx, top, bottom, t, speed) {
+  ctx.fillStyle = '#7d8596'; rr(cx - 50, top - 70, 100, 62, 10); ctx.fill();
+  ctx.fillStyle = '#aab2c2'; rr(cx - 50, top - 70, 100, 14, 6); ctx.fill();
+  ctx.fillStyle = '#c3c9d6'; ctx.fillRect(cx - 6, top - 8, 12, bottom - top);
+  const a = t * speed;
+  for (let k = 0; k < 2; k++) {
+    const ang = a + k * Math.PI, wdt = Math.cos(ang) * 78;
+    ctx.fillStyle = k ? '#b9c0ce' : '#9aa2b2';
+    ctx.beginPath(); ctx.ellipse(cx + wdt / 2, bottom, Math.abs(wdt / 2) + 3, 16, 0, 0, 7); ctx.fill();
+  }
+}
+
+function microbe(x, y, ang, s, a, wig) {
+  ctx.save(); ctx.globalAlpha *= a; ctx.translate(x, y); ctx.rotate(ang); ctx.scale(s, s);
+  ctx.strokeStyle = 'rgba(246,198,224,0.8)'; ctx.lineWidth = 2.5; ctx.beginPath();
+  for (let k = 0; k < 14; k++) { const xx = -46 - k * 4, yy = Math.sin(k / 2 + wig) * 6; k ? ctx.lineTo(xx, yy) : ctx.moveTo(xx, yy); } ctx.stroke();
+  rr(-46, -17, 92, 34, 17); ctx.fillStyle = P.microbe; ctx.fill(); ctx.strokeStyle = P.microbeEdge; ctx.lineWidth = 3; ctx.stroke();
+  ctx.fillStyle = 'rgba(150,60,110,0.6)'; for (const [dx, dy, r] of [[-14, 3, 5], [4, -4, 4], [18, 5, 6]]) { ctx.beginPath(); ctx.arc(dx, dy, r, 0, 7); ctx.fill(); }
+  ctx.fillStyle = 'rgba(255,255,255,0.45)'; rr(-30, -9, 50, 6, 3); ctx.fill();
+  ctx.restore();
+}
+
+function membrane(cx, cy, w, t, a = 1) {
+  ctx.save(); ctx.globalAlpha *= a;
+  const R = rng(11), x0 = cx - w / 2;
+  // dirty side particles + microbes bouncing above
+  for (let i = 0; i < 14; i++) { const px = x0 + 30 + R() * (w - 60), ph = R() * 7, py = cy - 70 - Math.abs(Math.sin(t * 1.6 + ph)) * 110; particle(px, py, 9 + R() * 8, 0); }
+  for (let i = 0; i < 3; i++) { const ph = R() * 7; microbe(x0 + 120 + i * 260 + Math.sin(t + ph) * 30, cy - 120 - Math.abs(Math.sin(t * 1.2 + ph)) * 70, Math.sin(t + ph) * 0.4, 0.75, 1, t * 5 + ph); }
+  // membrane band with pores
+  ctx.fillStyle = 'rgba(205,200,255,0.18)'; rr(x0, cy - 20, w, 40, 10); ctx.fill();
+  ctx.strokeStyle = P.accent; ctx.lineWidth = 5; ctx.shadowColor = P.accentGlow; ctx.shadowBlur = 16;
+  for (let x = x0; x < x0 + w; x += 36) { ctx.beginPath(); ctx.moveTo(x + 6, cy - 20); ctx.lineTo(x + 26, cy - 20); ctx.moveTo(x + 6, cy + 20); ctx.lineTo(x + 26, cy + 20); ctx.stroke(); }
+  ctx.shadowBlur = 0;
+  // clean water drops passing through
+  for (let i = 0; i < 18; i++) { const px = x0 + 36 * (1 + (i * 7) % (w / 36 - 1)) - 0, life = (t * 0.55 + R()) % 1, py = cy - 120 + life * 300; ctx.fillStyle = `rgba(170,225,255,${0.8 * Math.sin(life * Math.PI)})`; ctx.beginPath(); ctx.arc(px - 20, py, 7, 0, 7); ctx.fill(); }
+  ctx.restore();
+}
+
+// ---------- scenes ----------
+const R1 = rng(42);
+const parts = Array.from({ length: 34 }, () => ({ x: (R1() - .5) * 2, y: (R1() - .5) * 2, r: 6 + R1() * 9, ph: R1() * 7, cl: 0 }));
+// assign floc clusters for scene E
+const centers = [[-0.45, -0.35], [0.35, -0.4], [-0.2, 0.25], [0.45, 0.3], [0.0, -0.05]];
+parts.forEach((p, i) => p.cl = i % centers.length);
+const tankParts = Array.from({ length: 40 }, () => ({ x: R1(), y: R1(), r: 6 + R1() * 7, ph: R1() * 7 }));
+const bugs = Array.from({ length: 7 }, (_, i) => ({ x: (R1() - .5) * 1.3, y: (R1() - .5) * 1.3, ang: R1() * 6, ph: R1() * 7, die: 33.4 + i * 0.32 + R1() * 0.2 }));
+
+const SCENES = [
+  { s: 0, e: 1.45, draw(t) {                                   // A — cover
+      surfaceLines(t, 1);
+      text('Suv tozalash', W / 2, 560, { size: 116, weight: 900, color: P.title, glow: P.accentGlow });
+      text('usullari', W / 2, 690, { size: 116, weight: 900, color: P.title, glow: P.accentGlow });
+      text('Water treatment techniques', W / 2, 785, { size: 40, weight: 500, color: P.sub });
+      ctx.strokeStyle = P.accent; ctx.lineWidth = 4; rr(W / 2 - 98, 898, 196, 64, 32); ctx.stroke();
+      text('3-QISM', W / 2, 943, { size: 36, weight: 800, color: P.accent });
+      text('KIMYOVIY', W / 2, 1085, { size: 110, weight: 900, color: '#FFFFFF', glow: 'rgba(255,255,255,0.35)', blur: 20 });
+      text('TOZALASH', W / 2, 1195, { size: 110, weight: 900, color: P.accent, glow: P.accentGlow });
+      flask(W / 2, 1480, 1.05, t);
+      text('@the.waterengineer', W / 2, 1735, { size: 40, weight: 700, color: P.sub });
+  } },
+  { s: 1.45, e: 9.3, draw(t) {                                 // B — chlorine smell at the tap
+      titleBlock(t, 1.6, 'XLOR HIDI', null);
+      subSwap(t, 4.3, 'kranni ochganingizda', 'yomon belgi emas', 1.8);
+      const k = easeOut(appear(t, 1.6, 0.6));
+      ctx.save(); ctx.globalAlpha *= k;
+      faucet(560 + (1 - k) * 60, 640, 1.15);
+      stream(593, 752, 1180, t);
+      glass(560, 1040, t, 0.62);
+      clWisp(560, 1030, t, 5, ease((t - 2.6) / 0.8));
+      ctx.restore();
+      const sk = easeBack(appear(t, 7.05, 0.55));
+      if (t > 7.05) shield(560, 1190, 0.95 * sk, clamp(sk));
+  } },
+  { s: 9.3, e: 18.75, draw(t) {                              // C — tiny particles keep floating
+      titleBlock(t, 9.4, 'MAYDA ZARRACHALAR', null, { size: 84 });
+      subSwap(t, 15.3, 'biologik tozalashdan keyin ham qoladi', 'choʻkmasdan suzib yuraveradi', 9.4);
+      const k = easeOut(appear(t, 9.4, 0.6));
+      ctx.save(); ctx.globalAlpha *= k;
+      lens(560, 920, 300, t, (cx, cy, r) => {
+        for (const p of parts) {
+          const x = cx + p.x * r * 0.85 + Math.sin(t * 1.3 + p.ph) * 14, y = cy + p.y * r * 0.85 + Math.cos(t * 1.1 + p.ph * 1.3) * 14;
+          particle(x, y, p.r, ease((t - 15.3) / 0.5) * 0.9 + 0.1);
+        }
+      });
+      ctx.restore();
+      const lk = appear(t, 15.6, 0.5);
+      if (lk > 0) text('manfiy zaryad → bir-birini itaradi', W / 2, 1338, { size: 36, weight: 700, color: P.accent, alpha: lk });
+  } },
+  { s: 18.75, e: 25.2, draw(t) {                             // D — coagulant dosing + rapid mix
+      titleBlock(t, 18.85, 'KOAGULYATSIYA', null);
+      subSwap(t, 21.6, 'alyuminiy yoki temir tuzi qoʻshiladi', 'tez aralashtiriladi: zaryad yoʻqoladi', 18.85);
+      const k = easeOut(appear(t, 18.85, 0.6)), X = 160, Y = 760, TW = 760, TH = 520;
+      ctx.save(); ctx.globalAlpha *= k;
+      // dosing hopper
+      ctx.fillStyle = '#8a92a4'; ctx.beginPath(); ctx.moveTo(X + TW - 210, 600); ctx.lineTo(X + TW - 60, 600); ctx.lineTo(X + TW - 115, 690); ctx.lineTo(X + TW - 155, 690); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = '#aab2c2'; ctx.fillRect(X + TW - 145, 690, 20, 40);
+      text('Al / Fe tuzi', X + TW - 135, 585, { size: 30, weight: 700, color: P.sub });
+      tank(X, Y, TW, TH, t, (wy) => {
+        for (const p of tankParts) {
+          const x = X + 30 + p.x * (TW - 60) + Math.sin(t * 2.5 + p.ph) * 18, y = wy + 40 + p.y * (TH - 110) + Math.cos(t * 2.2 + p.ph) * 14;
+          particle(x, y, p.r + 3, 1 - ease((t - 21.2) / 1.4));
+        }
+      });
+      // falling "+" crystals
+      for (let i = 0; i < 10; i++) {
+        const life = ((t - 19.2) * 0.9 + i / 10) % 1; if (t < 19.2) break;
+        const cx = X + TW - 135 + Math.sin(i * 3.1) * 16, cy = 735 + life * 170;
+        ctx.save(); ctx.globalAlpha *= (1 - life);
+        ctx.fillStyle = 'rgba(235,232,255,0.95)'; ctx.translate(cx, cy); ctx.rotate(Math.PI / 4); ctx.fillRect(-9, -9, 18, 18); ctx.restore();
+        text('+', cx + 20, cy + 10, { size: 30, weight: 800, color: P.accent, alpha: 1 - life });
+      }
+      mixer(X + TW / 2 - 80, Y - 30, Y + 300, t, 16);
+      ctx.restore();
+  } },
+  { s: 25.2, e: 29.25, draw(t) {                             // E — flocculation in the lens
+      titleBlock(t, 25.3, 'FLOKULYATSIYA', 'zarrachalar yopishib kattalashadi');
+      const k = easeOut(appear(t, 25.3, 0.5)), m = ease((t - 25.6) / 2.4), sink = ease((t - 27.8) / 1.4);
+      ctx.save(); ctx.globalAlpha *= k;
+      lens(560, 920, 300, t, (cx, cy, r) => {
+        centers.forEach(([fx, fy], ci) => {
+          const x = cx + fx * r * 0.85, y = cy + fy * r * 0.85 + sink * (r * 0.75 - fy * r * 0.4);
+          if (m > 0.55) floc(x, y, lerp(20, 62, ease((m - 0.55) / 0.45)), 50 + ci);
+        });
+        for (const p of parts) {
+          const [fx, fy] = centers[p.cl];
+          const sx = cx + p.x * r * 0.85 + Math.sin(t * 1.3 + p.ph) * 10, sy = cy + p.y * r * 0.85 + Math.cos(t * 1.1 + p.ph) * 10;
+          const tx = cx + fx * r * 0.85 + Math.cos(p.ph) * 22, ty = cy + fy * r * 0.85 + Math.sin(p.ph) * 22 + sink * (r * 0.75 - fy * r * 0.4);
+          ctx.save(); ctx.globalAlpha *= 1 - ease((m - 0.7) / 0.3); particle(lerp(sx, tx, m), lerp(sy, ty, m), p.r, 0); ctx.restore();
+        }
+      });
+      ctx.restore();
+  } },
+  { s: 29.25, e: 31.25, draw(t) {                            // F — settled sludge, clearer water
+      titleBlock(t, 29.35, 'KOAGULYATSIYA', 'loyqa tubga choʻkadi, suv tiniqlashadi');
+      const k = easeOut(appear(t, 29.35, 0.5)), X = 160, Y = 760, TW = 760, TH = 520, cl = ease((t - 29.4) / 1.5);
+      ctx.save(); ctx.globalAlpha *= k;
+      tank(X, Y, TW, TH, t, (wy) => {
+        const R = rng(77);
+        for (let i = 0; i < 16; i++) { const x = X + 40 + R() * (TW - 80), y0 = wy + 60 + R() * 200; floc(x, lerp(y0, Y + TH - 30 - R() * 20, ease(cl * 1.2 - R() * 0.2)), 26 + R() * 14, 90 + i); }
+        ctx.fillStyle = 'rgba(120,92,62,0.9)'; ctx.beginPath(); ctx.moveTo(X, Y + TH);
+        for (let xx = X; xx <= X + TW; xx += 20) ctx.lineTo(xx, Y + TH - 22 * cl - Math.sin(xx / 50) * 6 * cl);
+        ctx.lineTo(X + TW, Y + TH); ctx.closePath(); ctx.fill();
+      }, cl);
+      ctx.restore();
+  } },
+  { s: 31.25, e: 36.55, draw(t) {                            // G — disinfection
+      titleBlock(t, 31.35, 'DEZINFEKSIYA', 'xlor qolgan mikroblarni yoʻq qiladi');
+      const k = easeOut(appear(t, 31.35, 0.5));
+      ctx.save(); ctx.globalAlpha *= k;
+      lens(560, 920, 300, t, (cx, cy, r) => {
+        const base = ctx.globalAlpha;
+        for (const b of bugs) {
+          const life = clamp((t - b.die) / 0.45), x = cx + b.x * r * 0.8 + Math.sin(t + b.ph) * 12, y = cy + b.y * r * 0.8 + Math.cos(t * 0.9 + b.ph) * 12;
+          if (life < 1) microbe(x, y, b.ang + Math.sin(t + b.ph) * 0.2, 0.9 * (1 - life * 0.6), 1 - life, t * 6 + b.ph);
+          if (life > 0 && life < 1) { ctx.strokeStyle = `rgba(207,234,114,${1 - life})`; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(x, y, 20 + life * 60, 0, 7); ctx.stroke(); }
+        }
+        const R = rng(19);
+        for (let i = 0; i < 46; i++) {
+          const ph = R() * 7, a = R() * 7 + t * (0.4 + R() * 0.5), d = r * (0.2 + R() * 0.8), x = cx + Math.cos(a) * d, y = cy + Math.sin(a + ph) * d * 0.9;
+          ctx.fillStyle = P.cl; ctx.shadowColor = P.clGlow; ctx.shadowBlur = 10; ctx.globalAlpha = base * ease((t - 31.9 - R() * 0.8) / 0.4);
+          ctx.beginPath(); ctx.arc(x, y, 5 + R() * 3, 0, 7); ctx.fill();
+        }
+        ctx.shadowBlur = 0; ctx.globalAlpha = base;
+      });
+      ctx.restore();
+      const ck = appear(t, 33.6, 0.5);
+      if (ck > 0) { ctx.save(); ctx.globalAlpha *= ck; ctx.strokeStyle = P.accent; ctx.lineWidth = 3; rr(W / 2 - 345, 1300, 690, 70, 35); ctx.stroke(); ctx.restore();
+        text('JSST: suvda kamida 0,2 mg/l xlor qolsin', W / 2, 1347, { size: 31, maxW: 640, weight: 700, color: P.title, alpha: ck }); }
+  } },
+  { s: 36.55, e: 43.85, draw(t) {                            // H — downsides
+      titleBlock(t, 36.65, 'MINUS TOMONLARI', 'kimyoviy usulning ham kamchiligi bor', { size: 84 });
+      const cards = [
+        { t0: 39.05, x: 90, label1: 'Reagentlar', label2: 'qimmat', icon: (cx, cy) => {
+            for (let i = 0; i < 5; i++) { ctx.fillStyle = i % 2 ? '#D9B66A' : '#E8C77F'; ctx.beginPath(); ctx.ellipse(cx - 40, cy + 70 - i * 22, 70, 22, 0, 0, 7); ctx.fill(); ctx.strokeStyle = '#a8843f'; ctx.lineWidth = 3; ctx.stroke(); }
+            for (let i = 0; i < 3; i++) { ctx.fillStyle = i % 2 ? '#D9B66A' : '#E8C77F'; ctx.beginPath(); ctx.ellipse(cx + 75, cy + 70 - i * 22, 55, 18, 0, 0, 7); ctx.fill(); ctx.strokeStyle = '#a8843f'; ctx.stroke(); }
+            flask(cx + 10, cy - 70, 0.45, t);
+          } },
+        { t0: 41.55, x: 570, label1: 'Koʻp loyqa', label2: 'chiqindi', icon: (cx, cy) => {
+            ctx.fillStyle = '#7a5a3c'; ctx.beginPath(); ctx.moveTo(cx - 150, cy + 100); ctx.quadraticCurveTo(cx - 90, cy - 40, cx - 10, cy - 30); ctx.quadraticCurveTo(cx + 40, cy - 90, cx + 100, cy - 10); ctx.quadraticCurveTo(cx + 150, cy + 30, cx + 160, cy + 100); ctx.closePath(); ctx.fill();
+            ctx.fillStyle = '#94704c'; for (let i = 0; i < 9; i++) { ctx.beginPath(); ctx.arc(cx - 110 + i * 30, cy + 60 + Math.sin(i) * 20, 10 + (i % 3) * 4, 0, 7); ctx.fill(); }
+            for (let i = 0; i < 4; i++) { const yy = cy - 70 - ((t * 30 + i * 25) % 70); ctx.strokeStyle = `rgba(200,200,170,${0.5 - ((t * 30 + i * 25) % 70) / 140})`; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(cx - 40 + i * 28, yy + 30); ctx.quadraticCurveTo(cx - 30 + i * 28, yy + 15, cx - 40 + i * 28, yy); ctx.stroke(); }
+          } },
+      ];
+      for (const cd of cards) {
+        const k = easeBack(appear(t, cd.t0, 0.5)); if (k <= 0) continue;
+        ctx.save(); ctx.globalAlpha *= clamp(k); const cx = cd.x + 210, cy = 980;
+        ctx.translate(cx, cy); ctx.scale(0.85 + 0.15 * k, 0.85 + 0.15 * k); ctx.translate(-cx, -cy);
+        ctx.fillStyle = 'rgba(20,24,48,0.55)'; rr(cd.x, 700, 420, 560, 34); ctx.fill();
+        ctx.strokeStyle = 'rgba(185,170,255,0.55)'; ctx.lineWidth = 3; ctx.stroke();
+        cd.icon(cx, 900);
+        text(cd.label1, cx, 1135, { size: 52, weight: 800, color: P.title });
+        text(cd.label2, cx, 1200, { size: 52, weight: 800, color: P.accent });
+        ctx.restore();
+      }
+      if (t < 39.4) { const a = 1 - ease((t - 38.9) / 0.4); text('−', W / 2, 1060, { size: 260, weight: 900, color: P.accent, glow: P.accentGlow, alpha: a * easeOut(appear(t, 36.8, 0.5)) }); }
+  } },
+  { s: 43.85, e: 47.55, draw(t) {                            // I — membranes
+      titleBlock(t, 43.95, 'MEMBRANA', 'eng mayda zarrachalarni ushlab qoladi');
+      const k = easeOut(appear(t, 43.95, 0.6));
+      membrane(W / 2, 1000, 820, t, k);
+      text('toza suv', W / 2, 1260, { size: 38, weight: 700, color: 'rgba(170,225,255,0.95)', alpha: k * appear(t, 44.8, 0.5) });
+  } },
+  { s: 47.55, e: END + 1, draw(t) {                          // J — next part teaser
+      const k = easeOut(appear(t, 47.6, 0.5));
+      ctx.save(); ctx.globalAlpha *= k;
+      ctx.strokeStyle = P.accent; ctx.lineWidth = 4; rr(W / 2 - 98, 520, 196, 64, 32); ctx.stroke();
+      text('4-QISM', W / 2, 565, { size: 36, weight: 800, color: P.accent });
+      text('MEMBRANALI', W / 2, 715, { size: 112, weight: 900, color: '#FFFFFF', glow: 'rgba(255,255,255,0.35)', blur: 20 });
+      text('TOZALASH', W / 2, 830, { size: 112, weight: 900, color: P.accent, glow: P.accentGlow });
+      membrane(W / 2, 1180, 700, t, 1);
+      ctx.restore();
+  } },
+];
+
+// ---------- captions (karaoke, part 2 style) ----------
+function captions(t) {
+  if (t < 1.6) return;
+  const ch = CHUNKS.find(c => t >= c.s && t < c.e); if (!ch) return;
+  const ws = []; for (let i = ch.i0; i <= ch.i1; i++) ws.push(WORDS[i]);
+  ctx.save(); ctx.font = '800 60px Inter';
+  const sp = ctx.measureText(' ').width, widths = ws.map(w => ctx.measureText(w.d).width), total = widths.reduce((a, b) => a + b, 0) + sp * (ws.length - 1);
+  let scale = Math.min(1, 960 / total);
+  const k = easeOut((t - ch.s) / 0.12);
+  ctx.translate(W / 2, 1560); ctx.scale(scale * (0.94 + 0.06 * k), scale * (0.94 + 0.06 * k)); ctx.globalAlpha = Math.min(1, (t - ch.s) / 0.12 + 0.0001) > 0 ? k * ease((t - 1.6) / 0.25) : 0;
+  let x = -total / 2;
+  ws.forEach((w, i) => {
+    const active = t >= w.s && (t < w.e || i === ws.length - 1 || t < ws[i + 1].s);
+    const spoken = t >= w.s;
+    ctx.textAlign = 'left'; ctx.shadowColor = 'rgba(0,0,0,0.65)'; ctx.shadowBlur = 16; ctx.shadowOffsetY = 3;
+    ctx.fillStyle = active ? P.accent : (spoken ? '#FFFFFF' : 'rgba(255,255,255,0.92)');
+    ctx.fillText(w.d, x, 0); x += widths[i] + sp;
+  });
+  ctx.restore();
+}
+
+// ---------- frame ----------
+const FADE = 0.35;
+window.render = function (t) {
+  ctx.globalAlpha = 1; background(t);
+  for (const s of SCENES) {
+    if (t < s.s - 0.001 || t > s.e + FADE) continue;
+    const a = (s.s === 0 ? 1 : ease((t - s.s - 0.12) / 0.3)) * (1 - ease((t - s.e) / 0.25));
+    if (a <= 0) continue;
+    ctx.save(); ctx.globalAlpha = a; s.draw(t); ctx.restore();
+  }
+  captions(t);
+  const fo = ease((t - (END - 0.5)) / 0.5); if (fo > 0) { ctx.fillStyle = `rgba(0,0,0,${fo})`; ctx.fillRect(0, 0, W, H); }
+};
+window.ready = Promise.all([500, 700, 800, 900].map(w => document.fonts.load(`${w} 60px Inter`, 'Aaʻʼ'))).then(() => true);
+</script></body></html>
