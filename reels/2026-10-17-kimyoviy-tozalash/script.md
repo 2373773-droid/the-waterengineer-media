@@ -3,19 +3,19 @@
 Planned publish: Saturday 2026-10-17, 12:00 Tashkent (16:00 Seoul), Reel.
 Target length: ~40 s.
 
-## Narration (for VoiceLab) — short version, ~40 s
+## Narration (for VoiceLab) — Javohir's edit, typos fixed
 
-Kranni ochganingizda xlor hidini sezganmisiz? Bu yomon belgi emas, suvni yo‘lda qo‘riqlab kelayotgan himoyachi ekan.
+Har safar kranni ochganingizda xlor hidini sezganmisiz? Bu yomon belgi emas, aslida u suvni yo‘lda «qo‘riqlab kelayotgan himoyachi» xolos.
 
-Biologik tozalashdan keyin ham suvda juda mayda zarrachalar qoladi. Ular bir-birini itarib, cho‘kmasdan suzib yuraveradi.
+Oldingi videoda aytgandik: biologik tozalashdan keyin ham suvda juda mayda zarrachalar qoladi. Ular cho‘kmasdan suzib yuraveradi.
 
-Shunda suvga alyuminiy yoki temir tuzi qo‘shiladi. Zarrachalar bir-biriga yopishib, kattalashadi va tubga cho‘kadi. Buni koagulyatsiya deyishadi.
+Shunda suvga alyuminiy yoki temir tuzi qo‘shib, aralashtiriladi. Zarrachalar bir-biriga yopishib, kattalashadi va tubga cho‘kadi. Buni koagulyatsiya va flokulyatsiya deb atashadi.
 
-Oxirida xlor qolgan mikroblarni yo‘q qiladi.
+Oxirida xlor qolgan mikroblar bilan kurashib, ularni yo‘q qiladi.
 
-Minusi ham bor: reagentlar pul turadi va ko‘p chiqindi loyqa hosil bo‘ladi.
+Bu kabi tozalashning minusi ham bor: kimyoviy reagentlar ancha qimmat va ko‘p chiqindi loyqa chiqaradi.
 
-Keyingi qism membranali tozalash haqida bo‘ladi.
+Eng mayda zarrachalarni esa membranalar ushlab qoladi. Keyingi qism aynan shu haqida bo‘ladi.
 
 ## Scenes (same style as part 2, subtle violet tint for part 3)
 
