@@ -524,27 +524,27 @@ const SCENES = [
   } },
 ];
 // map real time -> layout time of scenes A–H (drawn against the placeholder timeline)
-const MAP = [[0,0],[1.0,1.15],[3.1,3.25],[9.0,8.35],[12.6,12.45],[18.3,16.85],[18.6,17.0],[21.8,20.2],[26.3,24.0],[31.0,27.3],[34.0,30.2],[36.7,31.7],[40.1,35.1],[43.7,37.85],[47.6,40.2],[48.3,42.0],[50.4,45.2]];
-function mapT(T) { for (let i = 1; i < MAP.length; i++) if (T <= MAP[i][0]) { const [a0, b0] = MAP[i - 1], [a1, b1] = MAP[i]; return b0 + (T - a0) / (a1 - a0) * (b1 - b0); } return T - 50.4 + 45.2; }
+const MAP = [[0,0],[1.0,1.15],[3.1,3.25],[9.0,8.35],[12.6,12.45],[18.3,16.85],[18.6,17.0],[21.8,20.2],[26.3,24.0],[31.0,27.3],[34.0,30.2],[36.7,31.7],[40.1,35.1],[43.7,37.85],[49.0,40.2],[49.9,42.0],[52.6,45.2]];
+function mapT(T) { for (let i = 1; i < MAP.length; i++) if (T <= MAP[i][0]) { const [a0, b0] = MAP[i - 1], [a1, b1] = MAP[i]; return b0 + (T - a0) / (a1 - a0) * (b1 - b0); } return T - 52.6 + 45.2; }
 
 // finale scenes use real time
 const steps4 = ['Fizik', 'Biologik', 'Kimyoviy', 'Membranali'];
 const FINALE = [
-  { s: 50.4, e: 62.3, draw(t) {                                 // J — the whole journey recap
-      titleBlock(t, 50.5, 'SUVNING YOʻLI', 'biz ichayotgan suv qanday jarayonlardan oʻtadi', { size: 92 });
-      const k = easeOut(appear(t, 50.5, 0.6));
+  { s: 52.6, e: 62.3, draw(t) {                                 // J — the whole journey recap
+      titleBlock(t, 52.7, 'SUVNING YOʻLI', 'biz ichayotgan suv qanday jarayonlardan oʻtadi', { size: 92 });
+      const k = easeOut(appear(t, 52.7, 0.6));
       ctx.save(); ctx.globalAlpha *= k;
       const x0 = 250, ys = [640, 790, 940, 1090];
       ctx.strokeStyle = 'rgba(127,227,224,0.35)'; ctx.lineWidth = 6; ctx.setLineDash([14, 14]); ctx.beginPath(); ctx.moveTo(x0, 600); ctx.lineTo(x0, 1180); ctx.stroke(); ctx.setLineDash([]);
       steps4.forEach((s, i) => {
-        const on = ease((t - 54.6 - i * 0.75) / 0.35), y = ys[i];
+        const on = ease((t - 55.9 - i * 0.6) / 0.35), y = ys[i];
         ctx.fillStyle = `rgba(14,40,52,${0.45 + 0.35 * on})`; rr(x0 + 60, y - 50, 600, 100, 50); ctx.fill();
         ctx.strokeStyle = on > 0.5 ? P.accent : 'rgba(127,227,224,0.3)'; ctx.lineWidth = 3; ctx.stroke();
         ctx.fillStyle = on > 0.5 ? P.accent : 'rgba(127,227,224,0.3)'; ctx.beginPath(); ctx.arc(x0, y, 20, 0, 7); ctx.fill();
         text(`${i + 1}-qism`, x0 + 120, y + 14, { size: 34, weight: 700, color: P.sub, align: 'left' });
         text(`${s} tozalash`, x0 + 280, y + 16, { size: 44, weight: 800, color: on > 0.5 ? P.title : P.sub, align: 'left', maxW: 360 });
       });
-      const dk = ease((t - 54.4) / 3.4); drop(x0, lerp(560, 1150, dk), 22);
+      const dk = ease((t - 55.8) / 2.6); drop(x0, lerp(560, 1150, dk), 22);
       const gk = easeBack(appear(t, 58.6, 0.6));
       if (gk > 0) { ctx.save(); ctx.globalAlpha *= clamp(gk); ctx.translate(W / 2, 1300); ctx.scale(0.55 * gk, 0.55 * gk); ctx.translate(-W / 2, -1300); glass(W / 2, 1180, t, 0.72); ctx.restore(); }
       ctx.restore();
