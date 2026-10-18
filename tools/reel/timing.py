@@ -7,8 +7,8 @@ PHRASES = [
     (0.68, 2.83, "Uyingizda suv filtri bormi?"),
     (3.15, 8.85, "Uning ichida, ehtimol, sochingizdan oʻn minglab marta ingichka teshikli parda ishlayapti desam ishonaszmi?"),
     (9.14, 12.25, "Oldingi qismda aytilganidek eng murakkab zarrachalar"),
-    (12.80, 18.13, "bilan memebrana kurashadi, yaʼni juda mayda teshikli pardalar orqali ushlab qolinadi."),
-    (18.53, 25.49, "Mikrofiltratsiya (MF) loyqa va bakteriyalarni toʻxtatadi. Ultrafiltratsiya (UF) undan ham mayda, xatto viruslarni ham ushlaydi."),
+    (12.80, 18.13, "bilan membrana kurashadi, yaʼni juda mayda teshikli pardalar orqali ushlab qolinadi."),
+    (18.53, 25.49, "Mikrofiltratsiya (MF) loyqa va bakteriyalarni toʻxtatadi. Ultrafiltratsiya (UF) undan ham mayda, hatto viruslarni ham ushlaydi."),
     (26.32, 30.86, "Teskari osmos (ya'ni Reverse Osmosis) esa suvdagi tuzni ham oʻtkazmaydi,"),
     (31.13, 33.36, "dengiz suvi aynan shunday chuchuklashtiriladi."),
     (34.14, 42.54, "Bu usulni ham o'ziga yarasha minusi bor: Membrana ishlashi uchun katta bosim, yaʼni koʻp elektr kerak, membrana esa vaqt oʻtib kirlanib qoladi."),
@@ -19,7 +19,7 @@ PHRASES = [
     (58.58, 61.91, "bo'lsa ham tanishtira olgan bo'lsam unda xursandman,"),
     (62.42, 64.63, "shunday ekan suvni qadriga yeting,"),
     (64.97, 67.43, "va har doimgidek bizni kuzatishda davom eting,"),
-    (67.71, 73.43, "suv haqida eng sodda tilda tushuntirilgan faktlar va ma'mulotlarni yetkashizga harakat qilamiz."),
+    (67.71, 73.43, "suv haqida eng sodda tilda tushuntirilgan faktlar va ma'lumotlarni yetkazishga harakat qilamiz."),
     (73.78, 76.60, "Keyingi videolarda ko'rishguncha xayr, salomat bo'ling."),
 ]
 
