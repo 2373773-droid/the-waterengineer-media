@@ -1,7 +1,7 @@
-# Suv haqida afsonalar | 1-qism: Qaynatilgan suv hamma narsadan toza
+# Qaynatilgan suv hamma narsadan tozami?
 
 Planned publish: Thursday 2026-10-22, 12:00 Tashkent (16:00 Seoul), Reel.
-Target length: ~50 s (~115 words). New reel series after "Suv tozalash usullari" ended with part 4.
+Target length: ~50 s (~115 words). Standalone reel (no series/parts from now on, Javohir's decision 2026-10-18).
 
 ## Narration (for VoiceLab) — draft, waiting for Javohir's edit
 
@@ -13,28 +13,28 @@ Ammo qaynatish kimyoviy moddalarni yoʻqotmaydi. Ogʻir metallar, tuzlar va bosh
 
 Demak, qaynatish mikrobdan himoya qiladi, kimyodan emas.
 
-Suv haqida yana qanday afsonalarni bilasiz? Kommentda yozing, keyingi qismlarda birma-bir tekshiramiz.
+Siz suv haqida qanday gapni eshitgansiz? Kommentda yozing, keyingi videolarimizdan birida tekshirib koʻramiz.
 
-## Scenes (same underwater world; new series accent: warm amber)
+## Scenes (same underwater world; accent: warm amber)
 
-1. Cover: "Suv haqida afsonalar" · 1-QISM · QAYNATILGAN SUV
+1. Cover: "QAYNATILGAN SUV" · "hamma narsadan tozami?"
 2. Hook: kettle boiling, stamp "AFSONA?" → splits into "✓ yarmi toʻgʻri"
 3. Lens: bacteria, virus, parasite (cyst) fade out as bubbles rise — "mikroblar nobud boʻladi"
 4. Timer ring: "1 daqiqa sharillab qaynasin"; mountain silhouette "2 000 m dan baland → 3 daqiqa", thermometer 100 °C → ~93 °C
 5. Lens again: metal ions (Pb, As) and salt (Na, Cl) still floating after boiling — "kimyo qolaveradi"
 6. Callback: kettle limescale (choynak post) — "qatlam qaynatgandan keyin paydo boʻladi"
 7. Split card: ✓ MIKROB / ✕ KIMYO
-8. CTA: "Qaysi afsonani tekshiraylik?" + @the.waterengineer
+8. CTA: "Qaysi gapni tekshiraylik?" + @the.waterengineer
 
 ## Caption draft (new info, not in the video)
 
-Suv haqida afsonalar | 1-qism 💧
+Qaynatilgan suv hamma narsadan tozami? 💧
 
 Oʻylab qarasam, qaynatilgan suvning taʼmi nega "boʻsh" boʻlishini hammamiz ham bilmas ekanmiz. Qaynaganda suvdagi erigan havo chiqib ketadi, shuning uchun u biroz "jonsiz" tuyuladi. Taʼmini qaytarish uchun suvni bir toza idishdan ikkinchisiga bir necha marta quyib chiqish kifoya, havo yana aralashadi.
 
 Yana bir gap: qaynatilgan suvni ochiq idishda uzoq qoldirsangiz, mikroblar unga qaytadan tushishi mumkin. Shuning uchun uni yopiq, toza idishda saqlagan maʼqul.
 
-Siz qanday afsonani eshitgansiz? Kommentda yozing, navbatdagi qismlarda tekshirib chiqamiz.
+Siz suv haqida qanday gapni eshitgansiz? Kommentda yozing, birga tekshirib koʻramiz.
 
 Manba: US CDC (water treatment); US EPA, Emergency Disinfection of Drinking Water
 
