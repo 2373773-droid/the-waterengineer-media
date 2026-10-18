@@ -6,7 +6,7 @@ import sys, subprocess, pathlib
 from playwright.sync_api import sync_playwright
 
 ROOT = pathlib.Path(__file__).parent.resolve()
-END, FPS = 51.3, 30
+END, FPS = 77.3, 30
 
 def page_ctx(pw):
     b = pw.chromium.launch(args=["--allow-file-access-from-files"])

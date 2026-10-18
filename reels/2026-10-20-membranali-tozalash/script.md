@@ -1,19 +1,21 @@
 # Suv tozalash usullari | 4-qism: Membranali tozalash
 
 Planned publish: Tuesday 2026-10-20, 12:00 Tashkent (16:00 Seoul), Reel.
-Target length: ~45–50 s (~105 words).
+Length: 77.3 s.
 
-## Narration (for VoiceLab) — draft, waiting for Javohir's edit
+## Narration (as recorded by Javohir, verbatim)
 
-Uyingizda suv filtri bormi? Uning ichida, ehtimol, sochingizdan oʻn minglab marta ingichka teshikli parda ishlayapti.
+Uyingizda suv filtri bormi? Uning ichida, ehtimol, sochingizdan oʻn minglab marta ingichka teshikli parda ishlayapti desam ishonaszmi?
 
-Kimyoviy tozalashdan keyin ham suvda eng mayda zarrachalar qoladi. Ularni membrana, yaʼni juda mayda teshikli parda ushlab qoladi.
+Oldingi qismda aytilganidek eng murakkab zarrachalar bilan memebrana kurashadi, yaʼni juda mayda teshikli pardalar orqali ushlab qolinadi.
 
-Mikrofiltratsiya loyqa va bakteriyalarni toʻxtatadi. Ultrafiltratsiya undan ham mayda, koʻp viruslarni ham ushlaydi. Teskari osmos esa hatto suvdagi tuzni ham oʻtkazmaydi, dengiz suvi aynan shunday chuchuklashtiriladi.
+Mikrofiltratsiya (MF) loyqa va bakteriyalarni toʻxtatadi. Ultrafiltratsiya (UF) undan ham mayda, xatto viruslarni ham ushlaydi. Teskari osmos (ya'ni Reverse Osmosis) esa suvdagi tuzni ham oʻtkazmaydi, dengiz suvi aynan shunday chuchuklashtiriladi.
 
-Minusi ham bor: buning uchun katta bosim, yaʼni koʻp elektr kerak, membrana esa vaqt oʻtib kirlanib qoladi. Uydagi teskari osmos filtrlari ham 1 litr toza suv uchun taxminan 5 litr suvni kanalizatsiyaga tashlab yuboradi.
+Bu usulni ham o'ziga yarasha minusi bor: Membrana ishlashi uchun katta bosim, yaʼni koʻp elektr kerak, membrana esa vaqt oʻtib kirlanib qoladi. Misol uchun, uydagi teskari osmos filtrlari ham 1 litr toza suv uchun taxminan 5 litr suvni kanalizatsiyaga oqizib yuboradi.
 
-Keyingi videoda toʻrt usulni bitta hikoyaga jamlaymiz: unitazni yuvganingizdan keyin suv qayerga ketadi?
+Hozirgicha, biz iste'mol qilayotgan suv qanday jarayonlardan o'tib kelayotgani haqida ozgina bo'lsa ham tanishtira olgan bo'lsam unda xursandman, shunday ekan suvni qadriga yeting, va har doimgidek bizni kuzatishda davom eting, suv haqida eng sodda tilda tushuntirilgan faktlar va ma'mulotlarni yetkashizga harakat qilamiz. Keyingi videolarda ko'rishguncha xayr, salomat bo'ling.
+
+Final length: 77.3 s. Ending is a series farewell (no part 5 teaser); last scenes: "Suvning yoʻli" recap of parts 1–4, then "Suvni qadriga yeting" + @the.waterengineer.
 
 ## Scenes (same underwater world as parts 2–3, part 4 accent: cyan/aqua)
 

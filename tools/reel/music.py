@@ -3,7 +3,7 @@ import numpy as np
 from scipy.io import wavfile
 from scipy.signal import butter, sosfilt
 
-SR, DUR = 48000, 51.3
+SR, DUR = 48000, 77.3
 t = np.arange(int(SR * DUR)) / SR
 rng = np.random.default_rng(3)
 
