@@ -33,10 +33,7 @@ Bug' suv to'liq qaynamasdan oldin ham chiqadi. Haqiqiy qaynash bu suv hamma joyi
 [3 · chemicals, glass in hand]
 Ammo qaynatish kimyoviy moddalarni yo'qotmaydi. Choynak tubidagi oq qatlam esingizdami? U qaynatish paytida cho'kadi, lekin bu zararsiz kalsiy va magniy. Og'ir metallar, ko'plab tuzlar va boshqa kimyoviy ifloslar esa bunday cho'kmaydi, suvda qolaveradi.
 
-[4 · summary]
-Demak, qaynatish mikrobdan himoya qiladi, kimyodan emas.
-
-[5 · CTA]
+[4 · CTA]
 Siz suv haqida yana qanday faktlarni bilishni xohlaysiz? Kommentda yozing, keyingi videolarimizda bular haqida ma'lumot berib o'tamiz.
 
 ## Top panel per paragraph
@@ -45,8 +42,8 @@ Siz suv haqida yana qanday faktlarni bilishni xohlaysiz? Kommentda yozing, keyin
 1. B-roll: steam from a kettle spout, close-up. Stamp "HALI QAYNAMAGAN!"
 2. Side-by-side: small bubbles/steam ✕ vs big rolling bubbles ✓. Timer ring "1 daqiqa"; graphic lens: bacteria / virus / parasite cyst fade out. Mountain silhouette "2 000 m dan baland → 3 daqiqa", thermometer 100 °C → ~93 °C.
 3. B-roll: limescale inside a kettle → label "Ca, Mg — zararsiz". Graphic lens: metal ions (Pb, As) and salts still floating — "kimyo qolaveradi".
-4. Split card: ✓ MIKROB / ✕ KIMYO.
-5. CTA card: "Qaysi faktni bilmoqchisiz?" + @the.waterengineer.
+3b. End of paragraph 3 (no narration, ~1.5 s): split card ✓ MIKROB / ✕ KIMYO.
+4. CTA card: "Qaysi faktni bilmoqchisiz?" + @the.waterengineer.
 
 Accent: warm amber on the dark-navy base.
 
