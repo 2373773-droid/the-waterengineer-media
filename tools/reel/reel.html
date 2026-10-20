@@ -569,6 +569,11 @@ const FINALE = [
 ];
 
 // ---------- captions (karaoke, part 2 style) ----------
+// Baseline y. Was 1560, but YouTube Shorts' bottom UI (channel name, title,
+// "Share your video") covers roughly y > 1290 on phones, so captions sat under it.
+// 1180 keeps them clear of both the Shorts and Instagram Reels overlays; keep
+// scene graphics above ~1100 so they don't collide with the caption band.
+const CAP_Y = 1180;
 function captions(t) {
   if (t < 1.6) return;
   const ch = CHUNKS.find(c => t >= c.s && t < c.e); if (!ch) return;
@@ -577,7 +582,7 @@ function captions(t) {
   const sp = ctx.measureText(' ').width, widths = ws.map(w => ctx.measureText(w.d).width), total = widths.reduce((a, b) => a + b, 0) + sp * (ws.length - 1);
   let scale = Math.min(1, 960 / total);
   const k = easeOut((t - ch.s) / 0.12);
-  ctx.translate(W / 2, 1560); ctx.scale(scale * (0.94 + 0.06 * k), scale * (0.94 + 0.06 * k)); ctx.globalAlpha = Math.min(1, (t - ch.s) / 0.12 + 0.0001) > 0 ? k * ease((t - 1.6) / 0.25) : 0;
+  ctx.translate(W / 2, CAP_Y); ctx.scale(scale * (0.94 + 0.06 * k), scale * (0.94 + 0.06 * k)); ctx.globalAlpha = Math.min(1, (t - ch.s) / 0.12 + 0.0001) > 0 ? k * ease((t - 1.6) / 0.25) : 0;
   let x = -total / 2;
   ws.forEach((w, i) => {
     const active = t >= w.s && (t < w.e || i === ws.length - 1 || t < ws[i + 1].s);
