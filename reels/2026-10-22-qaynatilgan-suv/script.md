@@ -42,7 +42,6 @@ Siz suv haqida yana qanday faktlarni bilishni xohlaysiz? Kommentda yozing, keyin
 1. B-roll: steam from a kettle spout, close-up. Stamp "HALI QAYNAMAGAN!"
 2. Side-by-side: small bubbles/steam ✕ vs big rolling bubbles ✓. Timer ring "1 daqiqa"; graphic lens: bacteria / virus / parasite cyst fade out. Mountain silhouette "2 000 m dan baland → 3 daqiqa", thermometer 100 °C → ~93 °C.
 3. B-roll: limescale inside a kettle → label "Ca, Mg — zararsiz". Graphic lens: metal ions (Pb, As) and salts still floating — "kimyo qolaveradi".
-3b. End of paragraph 3 (no narration, ~1.5 s): split card ✓ MIKROB / ✕ KIMYO.
 4. CTA card: "Qaysi faktni bilmoqchisiz?" + @the.waterengineer.
 
 Accent: warm amber on the dark-navy base.
