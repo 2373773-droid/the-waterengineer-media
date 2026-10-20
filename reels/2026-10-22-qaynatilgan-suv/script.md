@@ -28,7 +28,7 @@ Layout (1080x1920):
 Choynakdan bug' chiqdimi? Shoshmang, suv hali qaynamagan.
 
 [2 · real boiling + microbes]
-Bug' suv to'liq qaynamasdan oldin ham chiqadi. Haqiqiy qaynash bu suv hamma joyidan katta pufakchalar bilan sharillab qaynaganda. Shu holatda kamida bir daqiqa qaynasa, bakteriya, virus, hatto parazitlar ham nobud bo'ladi. Tog'da, ikki ming metrdan balandda esa uch daqiqa kerak, chunki u yerda suv pastroq haroratda qaynaydi.
+Bug' suv to'liq qaynamasdan oldin ham chiqadi. Haqiqiy qaynash bu suv hamma joyidan katta pufakchalar bilan sharillab qaynaganda. Shu holatda kamida bir daqiqa qaynasa, bakteriya, virus, hatto parazitlar ham nobud bo'ladi. Yaxshi qaynamagan suvda esa ba'zi mikroblar tirik qolib, ich ketishi va oshqozon-ichak kasalliklariga sabab bo'lishi mumkin. Tog'da, ikki ming metrdan balandda esa uch daqiqa kerak, chunki u yerda suv pastroq haroratda qaynaydi.
 
 [3 · chemicals, glass in hand]
 Ammo qaynatish kimyoviy moddalarni yo'qotmaydi. Choynak tubidagi oq qatlam esingizdami? U qaynatish paytida cho'kadi, lekin bu zararsiz kalsiy va magniy. Og'ir metallar, ko'plab tuzlar va boshqa kimyoviy ifloslar esa bunday cho'kmaydi, suvda qolaveradi.
