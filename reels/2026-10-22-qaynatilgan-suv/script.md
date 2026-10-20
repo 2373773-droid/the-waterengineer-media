@@ -22,30 +22,31 @@ Layout (1080x1920):
 - One take per paragraph is fine; pause 1–2 s between paragraphs (pauses get cut).
 - Send the video + the text as actually spoken.
 
-## Narration (for camera) — draft, waiting for Javohir's edit
+## Narration (for camera) — v2, Javohir's edit + new hook (2026-10-20), waiting for final OK
 
-[1 · hook, kettle in hand]
-Hammamiz bilamizki, suvni qaynatsak, toza boʻladi. Lekin oʻylab qarasam, bu gapning faqat yarmi toʻgʻri ekan.
+[1 · hook, kettle in hand, steam coming out]
+Choynakdan bug' chiqdimi? Shoshmang, suv hali qaynamagan.
 
-[2 · microbes]
-Qaynatish mikroblar bilan juda yaxshi kurashadi: bakteriya, virus, hatto parazitlar ham nobud boʻladi. Buning uchun suv bir daqiqa sharillab qaynasa kifoya. Togʻda, ikki ming metrdan balandda esa uch daqiqa kerak, chunki u yerda suv pastroq haroratda qaynaydi.
+[2 · real boiling + microbes]
+Bug' suv to'liq qaynamasdan oldin ham chiqadi. Haqiqiy qaynash bu suv hamma joyidan katta pufakchalar bilan sharillab qaynaganda. Shu holatda kamida bir daqiqa qaynasa, bakteriya, virus, hatto parazitlar ham nobud bo'ladi. Tog'da, ikki ming metrdan balandda esa uch daqiqa kerak, chunki u yerda suv pastroq haroratda qaynaydi.
 
 [3 · chemicals, glass in hand]
-Ammo qaynatish kimyoviy moddalarni yoʻqotmaydi. Ogʻir metallar, tuzlar va boshqa koʻplab kimyoviy ifloslar suvda qolaveradi. Choynakdagi oq qatlam esingizdami? U ham qaynatgandan keyin paydo boʻladi, yoʻqolmaydi.
+Ammo qaynatish kimyoviy moddalarni yo'qotmaydi. Choynak tubidagi oq qatlam esingizdami? U qaynatish paytida cho'kadi, lekin bu zararsiz kalsiy va magniy. Og'ir metallar, ko'plab tuzlar va boshqa kimyoviy ifloslar esa bunday cho'kmaydi, suvda qolaveradi.
 
 [4 · summary]
 Demak, qaynatish mikrobdan himoya qiladi, kimyodan emas.
 
 [5 · CTA]
-Siz suv haqida qanday gapni eshitgansiz? Kommentda yozing, keyingi videolarimizdan birida tekshirib koʻramiz.
+Siz suv haqida yana qanday faktlarni bilishni xohlaysiz? Kommentda yozing, keyingi videolarimizda bular haqida ma'lumot berib o'tamiz.
 
 ## Top panel per paragraph
 
-1. B-roll: kettle boiling, steam close-up. Stamp "AFSONA?" → "✓ yarmi toʻgʻri".
-2. B-roll: bubbling water macro → graphic lens: bacteria / virus / parasite cyst fade out. Timer ring "1 daqiqa"; mountain silhouette "2 000 m dan baland → 3 daqiqa", thermometer 100 °C → ~93 °C.
-3. Graphic lens: metal ions (Pb, As) and salt (Na, Cl) still floating after boiling — "kimyo qolaveradi". B-roll: limescale inside a kettle (callback to the 15.10 carousel).
+0. Cover: full-screen Javohir with kettle — "BUG' CHIQDI = QAYNADI?"
+1. B-roll: steam from a kettle spout, close-up. Stamp "HALI QAYNAMAGAN!"
+2. Side-by-side: small bubbles/steam ✕ vs big rolling bubbles ✓. Timer ring "1 daqiqa"; graphic lens: bacteria / virus / parasite cyst fade out. Mountain silhouette "2 000 m dan baland → 3 daqiqa", thermometer 100 °C → ~93 °C.
+3. B-roll: limescale inside a kettle → label "Ca, Mg — zararsiz". Graphic lens: metal ions (Pb, As) and salts still floating — "kimyo qolaveradi".
 4. Split card: ✓ MIKROB / ✕ KIMYO.
-5. CTA card: "Qaysi gapni tekshiraylik?" + @the.waterengineer.
+5. CTA card: "Qaysi faktni bilmoqchisiz?" + @the.waterengineer.
 
 Accent: warm amber on the dark-navy base.
 
