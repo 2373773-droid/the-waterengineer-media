@@ -34,7 +34,8 @@ Bug' suv to'liq qaynamasdan oldin ham chiqadi. Haqiqiy qaynash bu suv hamma joyi
 Ammo qaynatish kimyoviy moddalarni yo'qotmaydi. Choynak tubidagi oq qatlam esingizdami? U qaynatish paytida cho'kadi, lekin bu zararsiz kalsiy va magniy. Og'ir metallar, ko'plab tuzlar va boshqa kimyoviy ifloslar esa bunday cho'kmaydi, suvda qolaveradi.
 
 [4 · CTA]
-Siz suv haqida yana qanday faktlarni bilishni xohlaysiz? Kommentda yozing, keyingi videolarimizda bular haqida ma'lumot berib o'tamiz.
+Siz suv haqida yana qanday faktlarni bilishni xohlaysiz? Kommentda yozing, keyingi videolarimizda bular haqida ma'lumot berib o'tamiz. Bizni kuzatishda davom eting, suv haqida suvyektiv fikrlaymiz!
+(Subtitle spells it "suvyektiv" — pun on the account name @suvyektiv; spoken the same as "subyektiv".)
 
 ## Top panel per paragraph
 
