@@ -1,30 +1,53 @@
 # Qaynatilgan suv hamma narsadan tozami?
 
-Planned publish: Thursday 2026-10-22, 12:00 Tashkent (16:00 Seoul), Reel.
-Target length: ~50 s (~115 words). Standalone reel (no series/parts from now on, Javohir's decision 2026-10-18).
+Planned publish: Thursday 2026-10-22, 12:00 Tashkent (16:00 Seoul), Reel + YouTube Short.
+Target length: ~50 s (~115 words). Standalone reel (no series/parts, Javohir's decision 2026-10-18).
 
-## Narration (for VoiceLab) — draft, waiting for Javohir's edit
+## Format C — talking head + B-roll on top (decided 2026-10-20)
 
+Javohir is on camera for the whole video.
+
+Layout (1080x1920):
+- Top panel, y 0–900: B-roll (Pixabay) + graphics, changes with each sentence.
+- Caption band, y ~960–1180: karaoke subtitles on the divider line (CAP_Y 1180 or a bit higher).
+- Bottom panel, y 900–1920: Javohir, cropped so his face sits at ~y 1000–1280, which keeps it clear of the YouTube Shorts / Reels bottom UI (y > ~1290). Chest/shoulders under the UI are fine.
+- Cover (first frame): full-screen Javohir with "QAYNATILGAN SUV · hamma narsadan tozami?"
+
+### Filming notes for Javohir
+- Phone vertical, at eye level, ~1 m away; face + shoulders + a little of the table in frame.
+- Leave some headroom above the head; Claude crops it into the bottom panel.
+- Hold a glass of water or the kettle (props: kettle, glass).
+- Window light in front of the face, plain background.
+- DJI Mic Mini via USB-C (Camera → Pro Video → mic icon → USB).
+- One take per paragraph is fine; pause 1–2 s between paragraphs (pauses get cut).
+- Send the video + the text as actually spoken.
+
+## Narration (for camera) — draft, waiting for Javohir's edit
+
+[1 · hook, kettle in hand]
 Hammamiz bilamizki, suvni qaynatsak, toza boʻladi. Lekin oʻylab qarasam, bu gapning faqat yarmi toʻgʻri ekan.
 
+[2 · microbes]
 Qaynatish mikroblar bilan juda yaxshi kurashadi: bakteriya, virus, hatto parazitlar ham nobud boʻladi. Buning uchun suv bir daqiqa sharillab qaynasa kifoya. Togʻda, ikki ming metrdan balandda esa uch daqiqa kerak, chunki u yerda suv pastroq haroratda qaynaydi.
 
+[3 · chemicals, glass in hand]
 Ammo qaynatish kimyoviy moddalarni yoʻqotmaydi. Ogʻir metallar, tuzlar va boshqa koʻplab kimyoviy ifloslar suvda qolaveradi. Choynakdagi oq qatlam esingizdami? U ham qaynatgandan keyin paydo boʻladi, yoʻqolmaydi.
 
+[4 · summary]
 Demak, qaynatish mikrobdan himoya qiladi, kimyodan emas.
 
+[5 · CTA]
 Siz suv haqida qanday gapni eshitgansiz? Kommentda yozing, keyingi videolarimizdan birida tekshirib koʻramiz.
 
-## Scenes (same underwater world; accent: warm amber)
+## Top panel per paragraph
 
-1. Cover: "QAYNATILGAN SUV" · "hamma narsadan tozami?"
-2. Hook: kettle boiling, stamp "AFSONA?" → splits into "✓ yarmi toʻgʻri"
-3. Lens: bacteria, virus, parasite (cyst) fade out as bubbles rise — "mikroblar nobud boʻladi"
-4. Timer ring: "1 daqiqa sharillab qaynasin"; mountain silhouette "2 000 m dan baland → 3 daqiqa", thermometer 100 °C → ~93 °C
-5. Lens again: metal ions (Pb, As) and salt (Na, Cl) still floating after boiling — "kimyo qolaveradi"
-6. Callback: kettle limescale (choynak post) — "qatlam qaynatgandan keyin paydo boʻladi"
-7. Split card: ✓ MIKROB / ✕ KIMYO
-8. CTA: "Qaysi gapni tekshiraylik?" + @the.waterengineer
+1. B-roll: kettle boiling, steam close-up. Stamp "AFSONA?" → "✓ yarmi toʻgʻri".
+2. B-roll: bubbling water macro → graphic lens: bacteria / virus / parasite cyst fade out. Timer ring "1 daqiqa"; mountain silhouette "2 000 m dan baland → 3 daqiqa", thermometer 100 °C → ~93 °C.
+3. Graphic lens: metal ions (Pb, As) and salt (Na, Cl) still floating after boiling — "kimyo qolaveradi". B-roll: limescale inside a kettle (callback to the 15.10 carousel).
+4. Split card: ✓ MIKROB / ✕ KIMYO.
+5. CTA card: "Qaysi gapni tekshiraylik?" + @the.waterengineer.
+
+Accent: warm amber on the dark-navy base.
 
 ## Caption draft (new info, not in the video)
 
