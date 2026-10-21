@@ -62,6 +62,18 @@ e = html.escape
 BRAND = os.environ.get("BRAND", "the.waterengineer")  # raw HTML allowed
 HANDLE = os.environ.get("HANDLE", "@the.waterengineer")
 TAGLINE = os.environ.get("TAGLINE", "Suv haqida, oddiy tilda.")
+# THEME=sky: Doktor H2O palette, taken from the YouTube avatar (sky-blue #84D2FD bg, navy "Dr. H2O" text)
+THEME_CSS = {"sky": """
+.dark{background:#84D2FD;color:#0B1F33}
+.dark .brand,.dark .kicker,.dark .handle,.accent{color:#1F3A80}
+.ripple{color:#FFFFFF;opacity:.55}
+.light{background:#EDF8FF;color:#0B1F33}
+.light .brand,.light .kicker{color:#1F6FB2}
+.rule{background:#1F6FB2}
+.steps .n{border-color:#1F6FB2;color:#1F6FB2}
+.note{border-left-color:#1F6FB2;background:#D6EFFE}
+.dark .foot{opacity:.7}
+"""}.get(os.environ.get("THEME", ""), "")
 n = len(slides)
 for i, s in enumerate(slides, 1):
     k = s["kind"]
@@ -78,7 +90,7 @@ for i, s in enumerate(slides, 1):
     if k == "hook": parts.append('<div class="swipe">Varaqlang →</div>')
     if k == "cta": parts.append(f'<div class="handle">{e(HANDLE if "HANDLE" in os.environ else s["handle"])}</div>')
     ripple = RIPPLE if s["theme"] == "dark" else ""
-    doc = f"""<!doctype html><html><head><meta charset="utf-8"><style>{fonts}{CSS}</style></head>
+    doc = f"""<!doctype html><html><head><meta charset="utf-8"><style>{fonts}{CSS}{THEME_CSS}</style></head>
 <body><div class="s {s['theme']} {k}">{ripple}
 <div class="top"><div class="brand">{DROP}<span>{BRAND}</span></div><div class="count">{i}/{n}</div></div>
 <div class="main">{''.join(parts)}</div>
