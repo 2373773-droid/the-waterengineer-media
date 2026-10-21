@@ -57,10 +57,10 @@ h1{font-family:Manrope,ManropeX,sans-serif;font-weight:800;font-size:76px;line-h
 """
 
 e = html.escape
-# Branding (defaults = Instagram @the.waterengineer). For the YouTube channel:
-#   BRAND="Doktor H<sub>2</sub>O" HANDLE="@suvyektiv" python3 render.py ...
-BRAND = os.environ.get("BRAND", "the.waterengineer")  # raw HTML allowed
-HANDLE = os.environ.get("HANDLE", "@the.waterengineer")
+# Branding (2026-10-21: Instagram and YouTube share one look — Doktor H2O / @suvyektiv, sky theme).
+# Old Instagram look: THEME=navy BRAND=the.waterengineer HANDLE=@the.waterengineer
+BRAND = os.environ.get("BRAND", "Doktor H<sub>2</sub>O")  # raw HTML allowed
+HANDLE = os.environ.get("HANDLE", "@suvyektiv")
 TAGLINE = os.environ.get("TAGLINE", "Suv haqida, oddiy tilda.")
 # THEME=sky: Doktor H2O palette, taken from the YouTube avatar (sky-blue #84D2FD bg, navy "Dr. H2O" text)
 THEME_CSS = {"sky": """
@@ -73,7 +73,7 @@ THEME_CSS = {"sky": """
 .steps .n{border-color:#1F6FB2;color:#1F6FB2}
 .note{border-left-color:#1F6FB2;background:#D6EFFE}
 .dark .foot{opacity:.7}
-"""}.get(os.environ.get("THEME", ""), "")
+"""}.get(os.environ.get("THEME", "sky"), "")
 n = len(slides)
 for i, s in enumerate(slides, 1):
     k = s["kind"]
