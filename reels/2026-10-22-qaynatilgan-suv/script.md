@@ -22,16 +22,16 @@ Layout (1080x1920):
 - One take per paragraph is fine; pause 1–2 s between paragraphs (pauses get cut).
 - Send the video + the text as actually spoken.
 
-## Narration (for camera) — v2, Javohir's edit + new hook (2026-10-20), waiting for final OK
+## Narration (for camera) — FINAL (Javohir, 2026-10-21)
 
 [1 · hook, kettle in hand, steam coming out]
 Choynakdan bug' chiqdimi? Shoshmang, suv hali qaynamagan.
 
 [2 · real boiling + microbes]
-Bug' suv to'liq qaynamasdan oldin ham chiqadi. Haqiqiy qaynash bu suv hamma joyidan katta pufakchalar bilan sharillab qaynaganda. Shu holatda kamida bir daqiqa qaynasa, bakteriya, virus, hatto parazitlar ham nobud bo'ladi. Yaxshi qaynamagan suvda esa ba'zi mikroblar tirik qolib, ich ketishi va oshqozon-ichak kasalliklariga sabab bo'lishi mumkin. Tog'da, ikki ming metrdan balandda esa uch daqiqa kerak, chunki u yerda suv pastroq haroratda qaynaydi.
+Bug' suv to'liq qaynamasdan oldin ham chiqadi. Haqiqiy qaynash bu suv biqir-biqir qaynaganda bo'ladi. Shu holatda kamida bir daqiqa qaynasa, bakteriya, virus, hatto parazitlar ham nobud bo'ladi. Yaxshi qaynamagan suv ich ketishi va oshqozon-ichak kasalliklariga sabab bo'lishi mumkin. Agar siz ma'lum balandlikda bo'lsangiz, masalan tog'da, uch daqiqa kerak, chunki u yerda suv pastroq haroratda qaynaydi.
 
 [3 · chemicals, glass in hand]
-Ammo qaynatish kimyoviy moddalarni yo'qotmaydi. Choynak tubidagi oq qatlam esingizdami? U qaynatish paytida cho'kadi, lekin bu zararsiz kalsiy va magniy. Og'ir metallar, ko'plab tuzlar va boshqa kimyoviy ifloslar esa bunday cho'kmaydi, suvda qolaveradi.
+Ammo qaynatish kimyoviy moddalarni yo'qotmaydi. Choynak tubidagi oq qatlam esingizdami? U qaynatish paytida cho'kadi, lekin bu zararsiz kalsiy va magniy minerallari. Og'ir metallar, ko'plab tuzlar va boshqa kimyoviy ifloslar esa qaynatilgan suvda ham qolaveradi.
 
 [4 · CTA]
 Siz suv haqida yana qanday faktlarni bilishni xohlaysiz? Kommentda yozing, keyingi videolarimizda bular haqida ma'lumot berib o'tamiz. Bizni kuzatishda davom eting, suv haqida suvyektiv fikrlaymiz!
