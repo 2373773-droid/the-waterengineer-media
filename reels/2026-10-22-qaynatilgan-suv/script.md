@@ -65,3 +65,9 @@ Manba: US CDC (water treatment); US EPA, Emergency Disinfection of Drinking Wate
 - CDC, Water treatment when hiking/camping/traveling: boiling kills all types of germs (viruses, bacteria, parasites incl. Cryptosporidium, Giardia); rolling boil 1 minute; above 6,500 ft (~2 000 m) 3 minutes; water with harmful chemicals cannot be made safe by boiling or disinfecting.
 - US EPA, Emergency Disinfection of Drinking Water: boiling will not destroy heavy metals, salts and most other chemicals; improve flat taste by pouring between clean containers several times (WHO 2015 cited).
 - Limescale forms on heating (see 2026-10-15 carousel, WHO Hardness in Drinking-water 2011).
+
+## As filmed / edited (2026-10-21)
+- Javohir's take differed from the script; subtitles follow the spoken text (src/subs.py). Lab setting (format C, B&W "REC" hook with focus-pull + beep, procedural steam from the pot).
+- Section changes at Javohir's points (sec:frame, raw take): 03:29 colour + C layout, 17:03 mountains, 27:18 chemicals (foam river), 32:26 kettle pour (Ca, Mg), ~48.9 s ion-formula panel (Pb²⁺ Hg²⁺ Cd²⁺ As / Na⁺ Cl⁻ NO₃⁻ SO₄²⁻), 54:21 full-screen end with glass badge "Doktor H₂O · @suvyektiv".
+- B-roll: Pixabay, real footage only (no AI-tagged clips): 267, 123988, 140030, 282048, 23955. Music: generated lo-fi (src/music_lofi.py).
+- Rebuild: src/build.py (needs raw take, Pixabay clips in px/, edited.mov from timeline.py).
