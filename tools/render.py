@@ -1,4 +1,4 @@
-import json, sys, html, pathlib
+import json, sys, html, pathlib, os
 from playwright.sync_api import sync_playwright
 
 ROOT = pathlib.Path(__file__).parent
@@ -34,6 +34,7 @@ body{font-family:Inter,InterX,sans-serif;-webkit-font-smoothing:antialiased}
 .brand{display:flex;align-items:center;gap:16px;color:#2F80ED}
 .dark .brand{color:#6FA8F5}
 .brand span{color:inherit}
+.brand sub{font-size:.7em;vertical-align:-.15em;line-height:0}
 .count{opacity:.55;font-variant-numeric:tabular-nums}
 .main{flex:1;display:flex;flex-direction:column;justify-content:center}
 .kicker{font-size:30px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:#2F80ED;margin-bottom:36px}
@@ -56,6 +57,11 @@ h1{font-family:Manrope,ManropeX,sans-serif;font-weight:800;font-size:76px;line-h
 """
 
 e = html.escape
+# Branding (defaults = Instagram @the.waterengineer). For the YouTube channel:
+#   BRAND="Doktor H<sub>2</sub>O" HANDLE="@suvyektiv" python3 render.py ...
+BRAND = os.environ.get("BRAND", "the.waterengineer")  # raw HTML allowed
+HANDLE = os.environ.get("HANDLE", "@the.waterengineer")
+TAGLINE = os.environ.get("TAGLINE", "Suv haqida, oddiy tilda.")
 n = len(slides)
 for i, s in enumerate(slides, 1):
     k = s["kind"]
@@ -70,13 +76,13 @@ for i, s in enumerate(slides, 1):
         parts.append('<ol class="steps">' + "".join(f'<li><span class="n">{j}</span><span>{e(t)}</span></li>' for j, t in enumerate(s["steps"], 1)) + "</ol>")
         if s.get("note"): parts.append(f'<div class="note">{e(s["note"])}</div>')
     if k == "hook": parts.append('<div class="swipe">Varaqlang →</div>')
-    if k == "cta": parts.append(f'<div class="handle">{e(s["handle"])}</div>')
+    if k == "cta": parts.append(f'<div class="handle">{e(HANDLE if "HANDLE" in os.environ else s["handle"])}</div>')
     ripple = RIPPLE if s["theme"] == "dark" else ""
     doc = f"""<!doctype html><html><head><meta charset="utf-8"><style>{fonts}{CSS}</style></head>
 <body><div class="s {s['theme']} {k}">{ripple}
-<div class="top"><div class="brand">{DROP}<span>the.waterengineer</span></div><div class="count">{i}/{n}</div></div>
+<div class="top"><div class="brand">{DROP}<span>{BRAND}</span></div><div class="count">{i}/{n}</div></div>
 <div class="main">{''.join(parts)}</div>
-<div class="foot"><span>@the.waterengineer</span><span>Suv haqida, oddiy tilda.</span></div>
+<div class="foot"><span>{e(HANDLE)}</span><span>{e(TAGLINE)}</span></div>
 </div></body></html>"""
     p = ROOT / f"_slide{i}.html"; p.write_text(doc, encoding="utf-8")
 
