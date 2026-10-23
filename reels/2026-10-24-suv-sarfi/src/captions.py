@@ -1,13 +1,13 @@
 """2026 'Submagic/Hormozi' captions rendered with Pillow into a transparent overlay video.
 - 1-3 words per screen, UPPERCASE, heavy font with thick black stroke
-- the word being spoken sits in a tilted yellow box (black text) and pops (0.8 -> 1.1 -> 1.0)
-- numbers / key words stay yellow when not active; each new chunk slides up 24 px
+- the word being spoken sits in a tilted brand sky-blue box (#84D2FD, navy text) and pops (0.8 -> 1.1 -> 1.0)
+- numbers / key words stay sky-blue when not active; each new chunk slides up 24 px
 usage (module): render(lines, dur, out_mov, y=1150)   lines = [(start, end, text)]"""
 import re, math, subprocess
 from PIL import Image, ImageDraw, ImageFont
 W, H, FPS = 1080, 1920, 30
 FONT = ImageFont.truetype("/usr/share/fonts/opentype/inter/Inter-Black.otf", 104)
-YEL, WHITE, BLACK = (255, 225, 0), (255, 255, 255), (0, 0, 0)
+SKY, NAVY, WHITE, BLACK = (132, 210, 253), (11, 31, 51), (255, 255, 255), (0, 0, 0)   # brand: logo sky-blue
 KEY = re.compile(r"\d|%|litr|o'rin|vanna|dala|yo'qol|milliard|kub|turkmaniston|o'zbekiston|suvyektiv|kanal", re.I)
 
 def chunks(words, n=3, maxc=15):
@@ -54,10 +54,10 @@ def frame(ev, t, y):
         s = pop((t - st[j]) / 0.18)
         word = Image.new("RGBA", (int(sizes[j]) + 80, 190), (0, 0, 0, 0)); dw = ImageDraw.Draw(word)
         if j == act:
-            dw.rounded_rectangle([12, 22, sizes[j] + 68, 168], 22, fill=YEL + (255,))
-            dw.text((40, 30), w.upper(), font=FONT, fill=BLACK)
+            dw.rounded_rectangle([12, 22, sizes[j] + 68, 168], 22, fill=SKY + (255,))
+            dw.text((40, 30), w.upper(), font=FONT, fill=NAVY)
         else:
-            col = YEL if KEY.search(w) else WHITE
+            col = SKY if KEY.search(w) else WHITE
             dw.text((40, 30), w.upper(), font=FONT, fill=col, stroke_width=10, stroke_fill=BLACK)
         if j == act: word = word.rotate(-3 if (len(ev) + j) % 2 else 3, resample=Image.BICUBIC, expand=False)
         if s != 1: word = word.resize((int(word.width * s), int(word.height * s)), Image.BICUBIC)
