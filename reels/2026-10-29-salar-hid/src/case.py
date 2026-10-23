@@ -18,7 +18,7 @@ def ph(t, t0, d=0.5): return ease((t - t0) / d)
 def back(u): u = max(0, min(1, u)); c = 1.7; return 1 + (c + 1) * (u - 1) ** 3 + c * (u - 1) ** 2
 
 # (scene fn, dur, chapter, caption text)
-S = [("hook", 7.5, "", "Sergelida yashaganlar bu hidni yaxshi bilishadi: chirigan tuxum hidi. Qayerdan keladi? Men aynan hid bo'yicha tadqiqot qilaman."),
+S = [("hook", 7.5, "", "Sergelida yashaganlar bu hidni yaxshi bilishadi: chirigan tuxum hidi. Qayerdan keladi? Men suv va oqova suv bo'yicha tadqiqot qilaman."),
      ("plant", 7.0, "INSHOOT", "Salar tozalash inshooti 1961 yilda qurilgan. Bugun u kuniga 900 ming kub metr oqova suv qabul qiladi."),
      ("h2s", 8.0, "AYBDOR", "Hidning aybdori — vodorod sulfid. Kislorod yetmagan joyda bakteriyalar sulfat bilan nafas oladi va shu gazni chiqaradi."),
      ("nose", 5.5, "SEZISH", "Burnimiz uni milliard qismdan yarim qism bo'lsa ham sezadi."),
@@ -116,8 +116,8 @@ def hook(im, d, t):
     stamp(im, "HID MANBASI?", 760, 640, 8, ph(t, 2.2, 0.35))
     a = ph(t, 4.6)                                                 # who is speaking
     if a > 0:
-        d.rounded_rectangle([80, 1300, 80 + 640 * a, 1400], 18, fill=NAVY + (int(240 * a),))
-        text(d, 110, 1312, "Javohir · hid tadqiqotchisi", fn("Bold", 38), WHITE, a)
+        d.rounded_rectangle([80, 1300, 80 + 860 * a, 1400], 18, fill=NAVY + (int(240 * a),))
+        text(d, 110, 1312, "Javohir · suv va oqova suv tadqiqotchisi", fn("Bold", 38), WHITE, a)
         text(d, 110, 1358, "Dong-A universiteti, suv laboratoriyasi", fn("Medium", 26), SKY, a)
 
 def plant(im, d, t):

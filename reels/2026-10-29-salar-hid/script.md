@@ -4,7 +4,7 @@ Reel: Payshanba 2026-10-29, 16:00 Seul. Format: Javohir (A-roll) + real B-roll +
 
 | # | Kadr | Matn (Javohir gapiradi) |
 |---|------|--------------------------|
-| 1 | JAVOHIR (hook) | Sergelida yashaganlar bu hidni yaxshi bilishadi: chirigan tuxum hidi. U qayerdan keladi? Men aynan hid bo'yicha tadqiqot qilaman, keling, tushuntiraman. |
+| 1 | JAVOHIR (hook) | Sergelida yashaganlar bu hidni yaxshi bilishadi: chirigan tuxum hidi. U qayerdan keladi? Men suv va oqova suv bo'yicha tadqiqot qilaman, keling, tushuntiraman. |
 | 2 | B-roll: tozalash inshooti | Salar oqova suv tozalash inshooti 1961 yilda ishga tushgan. Bugun u kuniga 900 ming kub metr oqova suvni qabul qiladi: Toshkentning 7 ta tumanidan. |
 | 3 | GRAFIKA: H₂S molekulasi | Hidning asosiy aybdori — vodorod sulfid, H₂S. Kislorod yetmagan joyda bakteriyalar sulfat bilan "nafas oladi" va shu gazni chiqaradi. |
 | 4 | GRAFIKA: sezish chegarasi | Burnimiz uni juda kam miqdorda ham sezadi: havoning milliard qismidan atigi yarim qismi bo'lsa ham. |
@@ -26,7 +26,7 @@ Reel: Payshanba 2026-10-29, 16:00 Seul. Format: Javohir (A-roll) + real B-roll +
 "Milliard qismidan yarim qismi" = 0,5 ppb, sezishning eng past chegarasi (odamlar orasida 0,5 dan 300 ppb gacha farq qiladi).
 
 ## Yakuniy ovoz matni (videodagi subtitr bilan bir xil)
-1. Sergelida yashaganlar bu hidni yaxshi bilishadi: chirigan tuxum hidi. Qayerdan keladi? Men aynan hid bo'yicha tadqiqot qilaman.
+1. Sergelida yashaganlar bu hidni yaxshi bilishadi: chirigan tuxum hidi. Qayerdan keladi? Men suv va oqova suv bo'yicha tadqiqot qilaman.
 2. Salar tozalash inshooti 1961 yilda qurilgan. Bugun u kuniga 900 ming kub metr oqova suv qabul qiladi.
 3. Hidning aybdori — vodorod sulfid. Kislorod yetmagan joyda bakteriyalar sulfat bilan nafas oladi va shu gazni chiqaradi.
 4. Burnimiz uni milliard qismdan yarim qism bo'lsa ham sezadi.
