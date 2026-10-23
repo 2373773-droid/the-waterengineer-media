@@ -8,7 +8,7 @@ Subtitrni Javohir o'zi qo'shadi.
 | 1 | JAVOHIR | Siz bir kunda qancha suv ishlatasiz? Choy, dush, idish yuvish… 150 litr? 200? | — |
 | 2 | B-roll: kran, stakan | Statistikaga ko'ra, O'zbekistonda bu raqam kishi boshiga kuniga 4 778 litr! | 0.0–5.0 |
 | 3 | QO'LDA CHIZILGAN: hisob | Hisob oddiy: mamlakat bir yilda 54,5 milliard kub metr suv oladi. Uni 365 kunga va aholiga bo'lsak — 4 778 litr chiqadi. Bugungi 39 million aholi bilan hisoblasak ham, kuniga 3 800 litrdan ko'p. Lekin bu o'rtacha raqam: har bir odam va har bir hudud uchun bir xil emas. | 5.0–13.5 |
-| 4 | B-roll vanna → QO'LDA CHIZILGAN: 24 vanna | Bu har kuni, har bir odamga taxminan 24 ta to'la vanna degani. | 13.5–21.5 |
+| 4 | KARTA: kub metr | Bu har bir kishiga har kuni deyarli 5 kub metr, ya'ni 5 tonnaga yaqin suv degani. Bir yilda — 1 700 kub metrdan ortiq. | 13.5–21.5 |
 | 5 | B-roll: O'zbekiston bayrog'i → Turkmaniston bayrog'i | Shu ko'rsatkich bo'yicha O'zbekiston dunyoda 4-o'rinda. | 21.5–28.0 |
 | 6 | QO'LDA CHIZILGAN: TOP-10 reyting | Birinchi o'rinda Turkmaniston — kuniga 15 mingdan ortiq litr. Undan keyin Chili va Gayana, to'rtinchi o'rinda — O'zbekiston. Top-10 da Markaziy Osiyodan yana Tojikiston va Qirg'iziston bor. | 28.0–35.5 |
 | 7 | JAVOHIR | Lekin to'xtang. Biz bu suvni ichmaymiz ham, unda yuvinmaymiz ham. | — |
@@ -18,7 +18,7 @@ Subtitrni Javohir o'zi qo'shadi.
 | 11 | B-roll: kanal, sug'orish | Beton kanallar va zamonaviy sug'orish bu yo'qotishni kamaytiradi. | 57.0–61.9 |
 | 12 | JAVOHIR | Siz uyda suvni qanday tejaysiz? Kommentda yozing. Bizni kuzatishda davom eting, suv haqida suvyektiv fikrlaymiz! | — |
 
-Hisob: 54,56 mlrd m³ ÷ 365 ÷ 31,3 mln = 4 778 L (31,3 mln — Worldometer ma'lumot yilidagi aholi). 4 778 × 0,9 ≈ 4 300 L; 4 300 × 0,36 ≈ 1 550 L; 4 778 ÷ 200 ≈ 24 vanna. Bugungi aholi (39 mln+, stat.uz 2026) bilan: 54,56 mlrd m³ ÷ 365 ÷ 39 mln ≈ 3 830 L.
+Hisob: 54,56 mlrd m³ ÷ 365 ÷ 31,3 mln = 4 778 L (31,3 mln — Worldometer ma'lumot yilidagi aholi). 4 778 × 0,9 ≈ 4 300 L; 4 300 × 0,36 ≈ 1 550 L; 4 778 L ≈ 4,8 m³ ≈ 4,8 t (1 L suv ≈ 1 kg); × 365 ≈ 1 744 m³/yil. Bugungi aholi (39 mln+, stat.uz 2026) bilan: 54,56 mlrd m³ ÷ 365 ÷ 39 mln ≈ 3 830 L.
 
 ## Muhim izoh (ilmiy aniqlik)
 4 778 litr — bu ichimlik suvi emas: mamlakatdagi jami suv olinishi (asosan qishloq xo'jaligi) aholiga bo'lingan ko'rsatkich. Skriptdagi 5-qator shuni aytadi.

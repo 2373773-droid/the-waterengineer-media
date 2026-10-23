@@ -47,27 +47,30 @@ def scene_calc(t):
     src(d, t, "*2016 yil aholisi · Manba: Worldometer (BMT, FAO); stat.uz", 1.0)
     return im
 
-TUB = None
-def tub_icon(fill):
-    im = Image.new("RGBA", (150, 80)); d = ImageDraw.Draw(im)
+def cube(d, x, y, sz, fill, a):
+    """isometric 1 m³ cube outline with water level `fill` (0..1)"""
+    dx, dy = sz * 0.5, sz * 0.28
+    A = (x, y + dy); B = (x + sz, y + dy); C = (x + sz + dx, y); D = (x + dx, y)
+    A2 = (A[0], A[1] + sz); B2 = (B[0], B[1] + sz); C2 = (C[0], C[1] + sz)
     if fill > 0:
-        d.rounded_rectangle([10, 22 + 40 * (1 - fill), 140, 62], 14, fill=SKY + (255,))
-    d.rounded_rectangle([6, 18, 144, 66], 18, outline=NAVY + (255,), width=6)
-    d.rectangle([0, 14, 150, 22], fill=(255, 255, 255, 0))
-    d.line([(4, 18), (146, 18)], fill=NAVY + (255,), width=6)
-    d.line([(26, 66), (22, 78)], fill=NAVY + (255,), width=6); d.line([(124, 66), (128, 78)], fill=NAVY + (255,), width=6)
-    return im
+        h = sz * fill
+        d.polygon([(A2[0], A2[1] - h), (B2[0], B2[1] - h), (C2[0], C2[1] - h), (C2[0] - 0, C2[1]), B2, A2], fill=SKY + (int(235 * a),))
+        d.polygon([(A2[0], A2[1] - h), (B2[0], B2[1] - h), (C2[0], C2[1] - h), (D[0], D[1] + sz - h)], fill=(170, 225, 254, int(255 * a)))
+    col = NAVY + (int(255 * a),)
+    for p, q in [(A, B), (B, C), (C, D), (D, A), (A, A2), (B, B2), (C, C2), (A2, B2), (B2, C2)]:
+        d.line([p, q], fill=col, width=5)
 def scene_tubs(t):
     im = Image.new("RGBA", (W, H)); d = ImageDraw.Draw(im)
-    head(d, t, "TAQQOSLASH", "4 778 litr — bu qancha?", "1 vanna ≈ 200 litr")
-    for n in range(24):
-        r, c = divmod(n, 4); x = 135 + c * 210; y = 520 + r * 62
-        a = ph(t, 0.4, 0.3); f = ph(t, 0.6 + n * 0.09, 0.25)
-        ic = tub_icon(f); ic.putalpha(ic.getchannel("A").point(lambda v: int(v * a)))
-        im.alpha_composite(ic.resize((120, 64)), (x, y)); d = ImageDraw.Draw(im)
-    k = min(24, max(0, int((t - 0.6) / 0.09) + 1)) if t > 0.6 else 0
-    txt(d, 540, 912, f"{k} ta vanna", fn("Black", 76), SKYD, ph(t, 0.6), "ma")
-    src(d, t, "har kuni, har bir kishiga · 4 778 ÷ 200 ≈ 24", 3.0)
+    head(d, t, "TAQQOSLASH", "4 778 litr — bu qancha?", "1 m³ = 1 000 litr ≈ 1 tonna")
+    vals = [1, 1, 1, 1, 0.78]
+    for i, v in enumerate(vals):
+        a = ph(t, 0.4 + i * 0.15, 0.3); f = v * ph(t, 0.8 + i * 0.35, 0.45)
+        cube(d, 104 + i * 174, 545, 106, f, a)
+    k = sum(v * ph(t, 0.8 + i * 0.35, 0.45) for i, v in enumerate(vals))
+    txt(d, 540, 735, f"≈ {k:.1f} m³".replace(".", ","), fn("Black", 92), SKYD, ph(t, 0.8), "ma")
+    txt(d, 540, 845, "har bir kishiga, har kuni — deyarli 5 tonna suv", fn("SemiBold", 36), NAVY, ph(t, 2.8), "ma")
+    txt(d, 540, 905, "bir yilda: ≈ 1 744 m³", fn("Bold", 38), GREY, ph(t, 3.4), "ma")
+    src(d, t, "4 778 L × 365 kun ≈ 1 744 m³ · o'rtacha ko'rsatkich", 3.6)
     return im
 
 DATA = [("Turkmaniston", 15445), ("Chili", 5880), ("Gayana", 5284), ("O'zbekiston", 4778), ("Tojikiston", 4460),
