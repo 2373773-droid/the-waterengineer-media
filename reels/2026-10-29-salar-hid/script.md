@@ -12,7 +12,7 @@ Reel: Payshanba 2026-10-29, 16:00 Seul. Format: Javohir (A-roll) + real B-roll +
 | 6 | GRAFIKA: tekshiruv (2021) | 2021 yilgi tekshiruvda Salarga 18 ta korxona ishlab chiqarish oqovasini tashlagani aniqlandi, jumladan teri zavodlari. Kimyoviy moddalar suvni tozalaydigan foydali mikroorganizmlarni nobud qilgan. 22 mas'ulga nisbatan ish ochildi. |
 | 7 | GRAFIKA: yechim (2026) | 2026 yil yozida hovuzlar germetik yopildi. Ichidagi havo 11,5 tonna katalitik sorbent, ultrabinafsha nur va 2,5 tonna faollashtirilgan ko'mirdan o'tkaziladi. Narxi — 9,5 milliard so'm. |
 | 8 | JAVOHIR | Rasmiylar chiqayotgan havoda H₂S nolga tushdi, deyishmoqda. Lekin hidni yo'qotish hali suvni tozalash degani emas. Asosiy yechim — korxonalar o'z oqovasini kanalizatsiyaga tashlashdan oldin tozalashi. |
-| 9 | CTA kartasi | Suvni tejang! Suv haqida bilmoqchi bo'lganlaringizni izohlarda yozib qoldiring. Bizni kuzatishda davom eting, suv haqida suvyektiv fikrlaymiz! |
+| 9 | CTA kartasi | Suvni qadrlang! Suv haqida bilmoqchi bo'lganlaringizni izohlarda yozib qoldiring. Bizni kuzatishda davom eting, suv haqida suvyektiv fikrlaymiz! |
 
 ## Manbalar
 - Kun.uz, 2026-09-05 — 9,5 mlrd so'mlik filtr, 900 ming m³/kun, 7 tuman, hovuzlar germetik yopilgan.
@@ -34,7 +34,7 @@ Reel: Payshanba 2026-10-29, 16:00 Seul. Format: Javohir (A-roll) + real B-roll +
 6. 2021 yilda Salarga 18 ta korxona, jumladan teri zavodlari, oqova tashlagani aniqlandi. Kimyoviy moddalar suvni tozalaydigan mikroorganizmlarni nobud qilgan. 22 mas'ulga ish ochildi.
 7. 2026 yil yozida hovuzlar yopildi, havo esa sorbent, ultrabinafsha nur va faollashtirilgan ko'mirdan o'tkazilmoqda. Narxi 9,5 milliard so'm.
 8. Rasmiylar H₂S nolga tushdi deyishmoqda. Lekin hidni yo'qotish suvni tozalash degani emas. Asosiy yechim — korxonalar oqovasini o'zi tozalashi.
-9. CTA.
+9. CTA: Suvni qadrlang! Suv haqida bilmoqchi bo'lganlaringizni izohlarda yozib qoldiring. Bizni kuzatishda davom eting, suv haqida suvyektiv fikrlaymiz!
 
 ## Foto manbalari (ekranda ko'rsatilgan)
 Toshkent sh. hokimligi (Repost.uz / Gazeta.uz orqali), Kun.uz, UzReport, Sputnik O'zbekiston, Ekologiya vazirligi (gov.uz), Daryo, Gazeta.uz, Yuz.uz.

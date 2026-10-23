@@ -26,7 +26,7 @@ S = [("hook", 7.5, "", "Sergelida yashaganlar bu hidni yaxshi bilishadi: chiriga
      ("case", 12.0, "TEKSHIRUV · 2021", "2021 yilda Salarga 18 ta korxona, jumladan teri zavodlari, oqova tashlagani aniqlandi. Kimyoviy moddalar suvni tozalaydigan mikroorganizmlarni nobud qilgan. 22 mas'ulga ish ochildi."),
      ("fix", 10.0, "YECHIM · 2026", "2026 yil yozida hovuzlar yopildi, havo esa sorbent, ultrabinafsha nur va faollashtirilgan ko'mirdan o'tkazilmoqda. Narxi 9,5 milliard so'm."),
      ("verdict", 10.0, "XULOSA", "Rasmiylar H₂S nolga tushdi deyishmoqda. Lekin hidni yo'qotish suvni tozalash degani emas. Asosiy yechim — korxonalar oqovasini o'zi tozalashi."),
-     ("cta", 6.5, "", "Suvni tejang! Suv haqida bilmoqchi bo'lganlaringizni izohlarda yozib qoldiring. Bizni kuzatishda davom eting, suv haqida suvyektiv fikrlaymiz!")]
+     ("cta", 6.5, "", "Suvni qadrlang! Suv haqida bilmoqchi bo'lganlaringizni izohlarda yozib qoldiring. Bizni kuzatishda davom eting, suv haqida suvyektiv fikrlaymiz!")]
 TOTAL = sum(s[1] for s in S)
 STARTS = [sum(s[1] for s in S[:i]) for i in range(len(S))]
 
@@ -264,7 +264,7 @@ def verdict(im, d, t):
             text(d, 110, yy, s_, fn("Black", 54), col, c)
             if k < 2: text(d, 900, yy + 4, "↓", fn("Black", 54), WARN, c, "ra")
 def cta(im, d, t):
-    text(d, 80, 380, "Suvni tejang!", fn("Black", 120), SKYD, ph(t, 0))
+    text(d, 80, 380, "Suvni qadrlang!", fn("Black", 120), SKYD, ph(t, 0))
     text(d, 80, 540, "Suv haqida bilmoqchi bo'lganlaringizni", fn("Bold", 42), NAVY, ph(t, 0.6))
     a = ph(t, 0.9)
     w = d.textlength("izohlarda yozib qoldiring ↓", font=fn("Bold", 46)) + 60
@@ -298,7 +298,7 @@ def frames(out=R + "board.mp4", only=None):
 def caps():
     import news
     lines = [(STARTS[i] + 0.15, STARTS[i] + s[1] - 0.15, s[3]) for i, s in enumerate(S)]
-    news.KEY = re.compile(r"\d|%|H₂S|hid|sulfid|korxona|teri|mikroorganizm|milliard|kub|kislorod|suvyektiv|tejang", re.I)
+    news.KEY = re.compile(r"\d|%|H₂S|hid|sulfid|korxona|teri|mikroorganizm|milliard|kub|kislorod|suvyektiv|qadrlang", re.I)
     news.caps_render(lines, TOTAL, R + "caps.mov")
 
 def build(out, use_caps=True):
