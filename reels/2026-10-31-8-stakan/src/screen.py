@@ -206,16 +206,12 @@ def s_thirst(t):
     return fr
 
 # (kind, footage-or-fn, footage start, dur, caption)
-S = [("foot", "8253", 1.0, 6.5, "Kuniga 8 stakan suv ichish kerak — buni hamma eshitgan. Lekin bu ilmiy asoslanganmi? Keling, maqolalarni o'zim ochib ko'raman."),
-     ("scr", s_origin, 0, 9.0, "1945 yilda Amerika Oziq-ovqat kengashi kattalarga kuniga 2,5 litr suv tavsiya qilgan. Lekin keyingi jumlani hamma unutgan: bu suvning ko'p qismi tayyor ovqatda bor."),
-     ("scr", s_valtin, 0, 5.5, "2002 yilda fiziolog Heinz Valtin bu tavsiyani tekshirib, qat'iy ilmiy dalil topmadi."),
-     ("scr", s_caff, 0, 4.5, "Uning xulosasi: choy va qahva ham suv hisobiga kiradi."),
+S = [("foot", "8253", 1.0, 6.5, "Kuniga 8 stakan suv ichish kerak — buni hamma eshitgan. Lekin bu ilmiy asoslanganmi? Keling, maqolani o'zim ochib ko'raman."),
      ("scr", s_science, 0, 8.0, "2022 yilda Science jurnalida katta tadqiqot chiqdi: 26 davlatdan 5 604 kishi, 8 kunlikdan 96 yoshgacha."),
      ("scr", s_results, 0, 9.5, "Natija: kunlik suv almashinuvi 1 litrdan 6 litrgacha farq qiladi. 20 yoshli, 70 kilolik yigitda taxminan 3,2 litr, 60 kilolik qizda 2,7 litr."),
      ("scr", s_food, 0, 5.0, "Lekin bu faqat ichilgan suv emas: ovqatdagi suv ham shunga kiradi."),
      ("scr", s_factors, 0, 7.0, "Sportchilarda kuniga taxminan 1 litr ko'proq. Havo namligi 50 foiz oshsa — yana 0,3 litr."),
      ("scr", s_verdict, 0, 8.0, "Maqola xulosasi: hammaga bir xil me'yor yo'q, 8 stakan tavsiyasi esa obyektiv dalil bilan tasdiqlanmagan."),
-     ("scr", s_thirst, 0, 5.5, "Eng yaxshi signal — chanqoq: u qon 2 foizdan kam quyuqlashganda ham boshlanadi."),
      ("foot", "95", 3.0, 6.5, "Suvni qadrlang! Suv haqida bilmoqchi bo'lganlaringizni izohlarda yozib qoldiring. Bizni kuzatishda davom eting, suv haqida suvyektiv fikrlaymiz!")]
 XF = 0.25
 TOTAL = sum(s[3] for s in S)
@@ -236,9 +232,9 @@ def o_hook(im, d, t):
     big(d, 540, 1000, "ilmiy asosi bormi?", fn("ExtraBold", 72), SKY, ph(t, 2.3), "ma")
     a = ph(t, 4.4)
     if a > 0:
-        w = d.textlength("Maqolalarni ochamiz →", font=fn("Bold", 46)) + 70
+        w = d.textlength("Maqolani ochamiz →", font=fn("Bold", 46)) + 70
         d.rounded_rectangle([(W - w) / 2, 1310, (W + w) / 2, 1400], 45, fill=WHITE + (int(240 * a),))
-        d.text((W / 2, 1355), "Maqolalarni ochamiz →", font=fn("Bold", 46), fill=NAVY + (int(255 * a),), anchor="mm")
+        d.text((W / 2, 1355), "Maqolani ochamiz →", font=fn("Bold", 46), fill=NAVY + (int(255 * a),), anchor="mm")
 
 def o_cta(im, d, t):
     big(d, 540, 360, "Suvni", fn("Black", 150), WHITE, ph(t, 0.0), "ma")

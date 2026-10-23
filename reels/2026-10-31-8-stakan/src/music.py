@@ -3,9 +3,9 @@ sustained cello-like drone; tension builds through the case, a hit + lift to D m
 import sys, numpy as np
 from scipy.io import wavfile
 from scipy.signal import butter, sosfilt
-SR = 48000; DUR = 75.5; n = int(SR * DUR); b = 60 / 112
+SR = 48000; DUR = 50.5; n = int(SR * DUR); b = 60 / 112
 L = np.zeros(n); R = np.zeros(n); rng = np.random.default_rng(7)
-M = dict(plant=6.5, h2s=15.5, nose=25.5, turn=43.0, case=48.0, fix=55.0, verdict=63.0, cta=68.5)
+M = dict(plant=6.5, h2s=14.5, nose=24.0, turn=29.0, case=29.0, fix=36.0, verdict=40.0, cta=44.0)
 f = lambda k: 440 * 2 ** ((k - 67) / 12)
 def put(s, t, g, pan=0.0):
     i = int(t * SR)
