@@ -7,11 +7,15 @@ F = "/usr/share/fonts/opentype/inter/Inter-{}.otf"
 XF = 0.4
 # file, start, dur, crop-x fraction, title, subtitle
 S = [("Z1", 4.5, 5.0, .33, "4 778 litr", "kishi boshiga · har kuni"),
-     ("P0", 0.0, 3.5, .50, "≈ 24 ta vanna", "har kuni, har bir odamga"),
+     ("@chart_calc", 0, 6.5, 0, "", ""),
+     ("P0", 0.0, 3.0, .50, "≈ 24 ta vanna", "har kuni, har bir odamga"),
+     ("@chart_tubs", 0, 4.6, 0, "", ""),
      ("G2", 2.0, 3.5, .38, "Dunyoda 4-o'rin", "kishi boshiga suv sarfi"),
      ("G6", 0.0, 3.0, .50, "1-o'rin: Turkmaniston", "kuniga 15 445 litr"),
+     ("@chart_rank", 0, 5.5, 0, "", ""),
      ("Q0", 0.0, 2.5, .50, "90% dan ko'p", "suv dalalarga ketadi"),
      ("U2", 2.0, 3.5, .50, "paxta · bug'doy · sholi", ""),
+     ("@chart_split", 0, 6.5, 0, "", ""),
      ("D0", 1.0, 4.5, .50, "36% yo'qoladi", "tuproq kanallarda"),
      ("V5", 2.0, 4.0, .50, "14 mlrd m³", "har yili yerga singib, bug'lanib"),
      ("T4", 5.0, 2.5, .50, "Beton kanallar", ""),
@@ -41,6 +45,12 @@ def title_png(i, t, sub):
 inputs, fc = [], []
 for i, (k, ss, dur, cx, t, sub) in enumerate(S):
     L = dur + XF
+    if k.startswith("@"):
+        # charts: last frame held for the crossfade tail
+        inputs += ["-i", f"/home/claude/r2/charts/{k[1:]}.mp4", "-loop", "1", "-i", title_png(i, "", "")]
+        v, g = 2 * i, 2 * i + 1
+        fc.append(f"[{v}:v]fps=30,tpad=stop_mode=clone:stop_duration=1,trim=0:{L:.3f},setpts=PTS-STARTPTS,setsar=1,format=yuv420p,settb=1/30[s{i}];[{g}:v]trim=0:0.1,nullsink")
+        continue
     inputs += ["-ss", str(ss), "-i", f"/home/claude/r2/px/{k}.mp4", "-loop", "1", "-i", title_png(i, t, sub)]
     v, g = 2 * i, 2 * i + 1
     fc.append(f"[{v}:v]fps=30,trim=0:{L:.3f},setpts=PTS-STARTPTS,scale=w=-2:h='1920*(1.0+0.05*t/{L:.3f})':eval=frame:flags=bicubic,"
