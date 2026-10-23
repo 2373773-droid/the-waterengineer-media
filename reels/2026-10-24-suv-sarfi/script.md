@@ -7,18 +7,18 @@ Subtitrni Javohir o'zi qo'shadi.
 |---|------|--------------------------|----------------------|
 | 1 | JAVOHIR | Siz bir kunda qancha suv ishlatasiz? Choy, dush, idish yuvish… 150 litr? 200? | — |
 | 2 | B-roll: kran, stakan | Statistikaga ko'ra, O'zbekistonda bu raqam kishi boshiga kuniga 4 778 litr! | 0.0–5.0 |
-| 3 | QO'LDA CHIZILGAN: hisob | Hisob oddiy: mamlakat bir yilda 54,5 milliard kub metr suv oladi. Uni 365 kunga va aholiga bo'lsak — 4 778 litr chiqadi. | 5.0–12.0 |
-| 4 | B-roll vanna → QO'LDA CHIZILGAN: 24 vanna | Bu har kuni, har bir odamga taxminan 24 ta to'la vanna degani. | 12.0–20.0 |
-| 5 | B-roll: Samarqand, bayroq | Shu ko'rsatkich bo'yicha O'zbekiston dunyoda 4-o'rinda. | 20.0–26.5 |
-| 6 | QO'LDA CHIZILGAN: reyting | Birinchi o'rinda Turkmaniston — 15 mingdan ortiq litr. Qo'shnilarimiz Tojikiston va Qirg'iziston ham bizga yaqin. | 26.5–32.5 |
+| 3 | QO'LDA CHIZILGAN: hisob | Hisob oddiy: mamlakat bir yilda 54,5 milliard kub metr suv oladi. Uni 365 kunga va aholiga bo'lsak — 4 778 litr chiqadi. Bugungi 39 million aholi bilan hisoblasak ham, kuniga 3 800 litrdan ko'p. Lekin bu o'rtacha raqam: har bir odam va har bir hudud uchun bir xil emas. | 5.0–13.5 |
+| 4 | B-roll vanna → QO'LDA CHIZILGAN: 24 vanna | Bu har kuni, har bir odamga taxminan 24 ta to'la vanna degani. | 13.5–21.5 |
+| 5 | B-roll: O'zbekiston bayrog'i → Turkmaniston bayrog'i | Shu ko'rsatkich bo'yicha O'zbekiston dunyoda 4-o'rinda. | 21.5–28.0 |
+| 6 | QO'LDA CHIZILGAN: reyting | Birinchi o'rinda Turkmaniston — 15 mingdan ortiq litr. Qo'shnilarimiz Tojikiston va Qirg'iziston ham bizga yaqin. | 28.0–34.0 |
 | 7 | JAVOHIR | Lekin to'xtang. Biz bu suvni ichmaymiz ham, unda yuvinmaymiz ham. | — |
-| 8 | B-roll: paxta, sholi | Suvning 90 foizdan ko'pi dalalarga ketadi: paxta, bug'doy, sholi. | 32.5–38.5 |
-| 9 | QO'LDA CHIZILGAN: qayerga ketadi | 4 778 litrdan taxminan 4 300 tasi — qishloq xo'jaligiga. Va shundan 1 550 litri tuproq kanallarda yo'qoladi. | 38.5–45.5 |
-| 10 | B-roll: tuproq ariq, qurigan yer | Ya'ni yiliga 14 milliard kub metr suv yerga singib, bug'lanib ketadi! | 45.5–54.0 |
-| 11 | B-roll: kanal, sug'orish | Beton kanallar va zamonaviy sug'orish bu yo'qotishni kamaytiradi. | 54.0–58.9 |
+| 8 | B-roll: paxta, sholi | Suvning 90 foizdan ko'pi dalalarga ketadi: paxta, bug'doy, sholi. | 34.0–40.0 |
+| 9 | QO'LDA CHIZILGAN: qayerga ketadi | 4 778 litrdan taxminan 4 300 tasi — qishloq xo'jaligiga. Va shundan 1 550 litri tuproq kanallarda yo'qoladi. | 40.0–47.0 |
+| 10 | B-roll: tuproq ariq, qurigan yer | Ya'ni yiliga 14 milliard kub metr suv yerga singib, bug'lanib ketadi! | 47.0–55.5 |
+| 11 | B-roll: kanal, sug'orish | Beton kanallar va zamonaviy sug'orish bu yo'qotishni kamaytiradi. | 55.5–60.4 |
 | 12 | JAVOHIR | Siz uyda suvni qanday tejaysiz? Kommentda yozing. Bizni kuzatishda davom eting, suv haqida suvyektiv fikrlaymiz! | — |
 
-Hisob: 54,56 mlrd m³ ÷ 365 ÷ 31,3 mln = 4 778 L (31,3 mln — Worldometer ma'lumot yilidagi aholi). 4 778 × 0,9 ≈ 4 300 L; 4 300 × 0,36 ≈ 1 550 L; 4 778 ÷ 200 ≈ 24 vanna.
+Hisob: 54,56 mlrd m³ ÷ 365 ÷ 31,3 mln = 4 778 L (31,3 mln — Worldometer ma'lumot yilidagi aholi). 4 778 × 0,9 ≈ 4 300 L; 4 300 × 0,36 ≈ 1 550 L; 4 778 ÷ 200 ≈ 24 vanna. Bugungi aholi (39 mln+, stat.uz 2026) bilan: 54,56 mlrd m³ ÷ 365 ÷ 39 mln ≈ 3 830 L.
 
 ## Muhim izoh (ilmiy aniqlik)
 4 778 litr — bu ichimlik suvi emas: mamlakatdagi jami suv olinishi (asosan qishloq xo'jaligi) aholiga bo'lingan ko'rsatkich. Skriptdagi 5-qator shuni aytadi.
@@ -26,7 +26,7 @@ Hisob: 54,56 mlrd m³ ÷ 365 ÷ 31,3 mln = 4 778 L (31,3 mln — Worldometer ma'
 ## Caption (taklif)
 Kuniga 4 778 litr? 💧
 
-Bu raqam qayerdan chiqadi: mamlakatda bir yilda olinadigan barcha suv (≈54,6 mlrd m³) aholi soniga bo'linadi. Uning asosiy qismi uyimizga emas, dalalarga ketadi.
+Bu raqam qayerdan chiqadi: mamlakatda bir yilda olinadigan barcha suv (≈54,6 mlrd m³) aholi soniga bo'linadi. Uning asosiy qismi uyimizga emas, dalalarga ketadi. Bu o'rtacha ko'rsatkich: har bir odam va hudud uchun bir xil emas. Bugungi 39 million aholi bilan hisoblasak, ≈3 830 litr chiqadi.
 
 Yaxshi yangilik: suvni tejashning eng katta imkoniyati ham aynan shu yerda — kanallarni betonlash va tomchilatib sug'orish.
 

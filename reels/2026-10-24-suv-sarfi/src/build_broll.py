@@ -7,11 +7,11 @@ F = "/usr/share/fonts/opentype/inter/Inter-{}.otf"
 XF = 0.4
 # file, start, dur, crop-x fraction, title, subtitle
 S = [("Z1", 4.5, 5.0, .33, "4 778 litr", "kishi boshiga · har kuni"),
-     ("@sk_calc", 0, 7.0, 0, "", ""),
+     ("@sk_calc", 0, 8.5, 0, "", ""),
      ("P0", 0.0, 3.0, .50, "≈ 24 ta vanna", "har kuni, har bir odamga"),
      ("@sk_tubs", 0, 5.0, 0, "", ""),
-     ("G2", 2.0, 3.5, .38, "Dunyoda 4-o'rin", "kishi boshiga suv sarfi"),
-     ("G6", 0.0, 3.0, .50, "1-o'rin: Turkmaniston", "kuniga 15 445 litr"),
+     ("G6", 0.0, 3.0, .50, "Dunyoda 4-o'rin", "kishi boshiga suv sarfi"),
+     ("TK0", 2.0, 3.5, .20, "1-o'rin: Turkmaniston", "kuniga 15 445 litr"),
      ("@sk_rank", 0, 6.0, 0, "", ""),
      ("Q0", 0.0, 2.5, .50, "90% dan ko'p", "suv dalalarga ketadi"),
      ("U2", 2.0, 3.5, .50, "paxta · bug'doy · sholi", ""),

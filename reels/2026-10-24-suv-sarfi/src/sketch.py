@@ -105,19 +105,21 @@ def render(name, dur, scene):
 # ---------- A: the sum, worked out on paper ----------
 def calc(im, t):
     d = ImageDraw.Draw(im, "RGBA")
-    write(im, 0, 150, "4 778 litr qayerdan chiqadi?", cav(78), INK, ph(t, 0, 0.9), t, 1, center=True, rot=-1)
-    stroke(d, [(180, 255), (900, 250)], RED, 6, t, 2, ph(t, 0.7, 0.4))
-    write(im, 150, 320, "yiliga olinadigan suv:", pat(48), GREY, ph(t, 1.0, 0.5), t, 3)
-    write(im, 150, 380, "54,56 mlrd m³", cav(118), INK, ph(t, 1.3, 0.8), t, 4)
-    write(im, 150, 540, "÷ 365 kun", cav(100), INK, ph(t, 2.2, 0.6), t, 5)
-    write(im, 150, 670, "÷ 31,3 mln kishi*", cav(100), INK, ph(t, 2.9, 0.7), t, 6)
-    stroke(d, [(140, 820), (940, 812)], INK, 7, t, 7, ph(t, 3.7, 0.35))
-    highlight(im, 160, 860, 880, 975, ph(t, 4.6, 0.5), t, 8)
-    write(im, 0, 830, "= 4 778 litr", cav(150), RED, ph(t, 4.0, 0.7), t, 9, center=True, rot=-2)
+    write(im, 0, 140, "4 778 litr qayerdan chiqadi?", cav(78), INK, ph(t, 0, 0.9), t, 1, center=True, rot=-1)
+    stroke(d, [(180, 245), (900, 240)], RED, 6, t, 2, ph(t, 0.7, 0.4))
+    write(im, 0, 262, "*Worldometer ma'lumot yilidagi aholi · BMT, FAO", pat(30), GREY, ph(t, 0.9, 0.4), t, 11, center=True)
+    write(im, 150, 310, "yiliga olinadigan suv:", pat(46), GREY, ph(t, 1.0, 0.5), t, 3)
+    write(im, 150, 360, "54,56 mlrd m³", cav(112), INK, ph(t, 1.3, 0.8), t, 4)
+    write(im, 150, 500, "÷ 365 kun", cav(96), INK, ph(t, 2.2, 0.6), t, 5)
+    write(im, 150, 610, "÷ 31,3 mln kishi*", cav(96), INK, ph(t, 2.9, 0.7), t, 6)
+    stroke(d, [(140, 745), (940, 738)], INK, 7, t, 7, ph(t, 3.7, 0.35))
+    highlight(im, 160, 785, 880, 895, ph(t, 4.6, 0.5), t, 8)
+    write(im, 0, 755, "= 4 778 litr", cav(146), RED, ph(t, 4.0, 0.7), t, 9, center=True, rot=-2)
     d = ImageDraw.Draw(im, "RGBA")
-    stroke(d, ellipse_pts(540, 915, 420, 110), RED, 7, t, 10, ph(t, 5.1, 0.7), amp=3)
-    write(im, 0, 1030, "*ma'lumot yilidagi aholi · Worldometer (BMT, FAO)", pat(32), GREY, ph(t, 5.3, 0.4), t, 11, center=True)
-render("sk_calc", 7.0, calc)
+    stroke(d, ellipse_pts(540, 840, 420, 100), RED, 7, t, 10, ph(t, 5.0, 0.7), amp=3)
+    write(im, 0, 950, "bugungi 39 mln aholi bilan ham ≈ 3 830 L", pat(46), BLUE, ph(t, 5.8, 0.7), t, 12, center=True)
+    write(im, 0, 1012, "o'rtacha raqam: har kim, har hudud uchun har xil!", pat(40), RED, ph(t, 6.7, 0.7), t, 13, center=True, rot=-1)
+render("sk_calc", 8.5, calc)
 
 # ---------- B: 24 bathtubs + tally marks ----------
 def tub_pts(x, y, w, h):
