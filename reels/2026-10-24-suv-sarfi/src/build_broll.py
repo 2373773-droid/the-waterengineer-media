@@ -57,13 +57,28 @@ for i, (k, ss, dur, cx, t, sub) in enumerate(S):
               f"crop=1080:1920:(iw-1080)*{cx}:(ih-1920)/2,setsar=1,eq=saturation=1.06:contrast=1.03,format=yuv420p[v{i}]")
     fc.append(f"[{g}:v]trim=0:{L:.3f},setpts=PTS-STARTPTS,format=rgba,fade=in:st=0.35:d=0.4:alpha=1,fade=out:st={L-0.6:.3f}:d=0.35:alpha=1[g{i}];"
               f"[v{i}][g{i}]overlay=format=auto,format=yuv420p,fps=30,settb=1/30[s{i}]")
-cur, off = "s0", S[0][2]
+# trendy transitions: whip pan (slide + directional motion blur), zoom punch, white flash
+TR = ["zoom", "whipL", "whipU", "whipL", "whipL", "zoom", "flash", "whipL", "zoom", "flash", "whipU", "whipL", "whipU"]
+XFD = {"zoom": ("zoomin", 0.32), "whipL": ("slideleft", 0.22), "whipU": ("slideup", 0.22), "flash": ("fadewhite", 0.30)}
+cur, off, ev, blurX, blurY = "s0", S[0][2], [], [], []
 for i in range(1, len(S)):
-    fc.append(f"[{cur}][s{i}]xfade=transition=fade:duration={XF}:offset={off:.3f}[x{i}]")
+    name, xd = XFD[TR[i - 1]]
+    fc.append(f"[{cur}][s{i}]xfade=transition={name}:duration={xd}:offset={off:.3f}[x{i}]")
+    ev.append((off + xd / 2, {"zoomin": "zoom", "slideleft": "whip", "slideup": "whip", "fadewhite": "flash"}[name]))
+    if TR[i - 1] == "whipL": blurX.append((off - 0.05, off + xd + 0.05))
+    if TR[i - 1] == "whipU": blurY.append((off - 0.05, off + xd + 0.05))
+    if TR[i - 1] == "zoom": blurX.append((off + 0.05, off + xd - 0.05))
     cur = f"x{i}"; off += S[i][2]
-fc.append(f"[{cur}]fade=in:d=0.4,fade=out:st={off+XF-0.5:.3f}:d=0.5[V]")
-subprocess.run(["ffmpeg", "-v", "error", "-y"] + inputs + ["-filter_complex", ";".join(fc), "-map", "[V]", "-an",
-                "-c:v", "libx264", "-crf", "19", "-preset", "medium", "-pix_fmt", "yuv420p", "-movflags", "+faststart", sys.argv[1]], check=True)
+en = lambda w: "+".join(f"between(t\\,{a:.3f}\\,{b:.3f})" for a, b in w)
+fc.append(f"[{cur}]avgblur=sizeX=70:sizeY=1:enable='{en(blurX)}',avgblur=sizeX=1:sizeY=90:enable='{en(blurY)}',fade=in:d=0.3,fade=out:st={off+XF-0.5:.3f}:d=0.5[V]")
+import numpy as np, os
+from scipy.io import wavfile
+sys.path.insert(0, "/home/claude/r2"); import sfx
+a = sfx.render(ev, off + XF); wavfile.write("/home/claude/r2/sfx.wav", sfx.SR, (a.T * 32767).astype(np.int16))
+subprocess.run(["ffmpeg", "-v", "error", "-y"] + inputs + ["-i", "/home/claude/r2/sfx.wav", "-filter_complex", ";".join(fc),
+                "-map", "[V]", "-map", f"{len(inputs)//2 if False else sum(1 for x in inputs if x == '-i')}:a",
+                "-c:v", "libx264", "-crf", "19", "-preset", "medium", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", sys.argv[1]], check=True)
+print("transitions:", [(round(t, 2), k) for t, k in ev])
 # scene list
 t = 0
 for k, ss, dur, cx, ti, sub in S:
