@@ -16,7 +16,7 @@ Subtitrni Javohir o'zi qo'shadi.
 | 9 | QO'LDA CHIZILGAN: qayerga ketadi | 4 778 litrdan taxminan 4 300 tasi — qishloq xo'jaligiga. Va shundan 1 550 litri tuproq kanallarda yo'qoladi. | 41.5–48.5 |
 | 10 | B-roll: tuproq ariq, qurigan yer | Ya'ni yiliga 14 milliard kub metr suv yerga singib, bug'lanib ketadi! | 48.5–57.0 |
 | 11 | B-roll: kanal, sug'orish | Beton kanallar va zamonaviy sug'orish bu yo'qotishni kamaytiradi. | 57.0–61.9 |
-| 12 | JAVOHIR | Siz uyda suvni qanday tejaysiz? Kommentda yozing. Bizni kuzatishda davom eting, suv haqida suvyektiv fikrlaymiz! | — |
+| 12 | JAVOHIR + CTA kartasi | Suv haqida yana nimalarni bilmoqchisiz? Izohlarda yozib qoldiring. Bizni kuzatishda davom eting, suv haqida suvyektiv fikrlaymiz! | 58.5–64.5 |
 
 Hisob: 54,56 mlrd m³ ÷ 365 ÷ 31,3 mln = 4 778 L (31,3 mln — Worldometer ma'lumot yilidagi aholi). 4 778 × 0,9 ≈ 4 300 L; 4 300 × 0,36 ≈ 1 550 L; 4 778 L ≈ 4,8 m³ ≈ 4,8 t (1 L suv ≈ 1 kg); × 365 ≈ 1 744 m³/yil. Bugungi aholi (39 mln+, stat.uz 2026) bilan: 54,56 mlrd m³ ÷ 365 ÷ 39 mln ≈ 3 830 L.
 
@@ -30,7 +30,7 @@ Bu raqam qayerdan chiqadi: mamlakatda bir yilda olinadigan barcha suv (≈54,6 m
 
 Yaxshi yangilik: suvni tejashning eng katta imkoniyati ham aynan shu yerda — kanallarni betonlash va tomchilatib sug'orish.
 
-Siz uyda suvni qanday tejaysiz? Kommentda yozing 👇
+Suv haqida yana nimalarni bilmoqchisiz? Izohlarda yozib qoldiring 👇
 
 Manba: Worldometer (BMT/FAO ma'lumotlari), The Times of Central Asia, 2026; O'zbekiston Prezidenti matbuot xizmati (36% yo'qotish), 2023.
 

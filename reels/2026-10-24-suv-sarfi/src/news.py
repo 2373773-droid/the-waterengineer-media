@@ -113,6 +113,27 @@ def scene_split(t):
     src(d, t, "Manba: Prezident matbuot xizmati (2023) · Worldometer", 1.0)
     return im
 
+def scene_cta(t):
+    im = Image.new("RGBA", (W, H)); d = ImageDraw.Draw(im)
+    a = ph(t, 0, 0.4)
+    card(d, 60, 330, 1020, 1030, a)
+    txt(d, 540, 400, "Suv haqida yana nimalarni", fn("ExtraBold", 58), NAVY, a, "ma")
+    txt(d, 540, 472, "bilmoqchisiz?", fn("ExtraBold", 58), NAVY, a, "ma")
+    a2 = ph(t, 0.6)
+    if a2 > 0:
+        w = d.textlength("Izohlarda yozib qoldiring", font=fn("Bold", 44)) + 120
+        d.rounded_rectangle([540 - w / 2, 575, 540 + w / 2, 655], 40, fill=SKY + (int(255 * a2),))
+        txt(d, 540, 590, "Izohlarda yozib qoldiring", fn("Bold", 44), NAVY, a2, "ma")
+        ay = 690 + 10 * math.sin(t * 5)                       # small bouncing arrow
+        d.line([(540, ay), (540, ay + 46)], fill=NAVY + (int(255 * a2),), width=7)
+        d.polygon([(518, ay + 34), (562, ay + 34), (540, ay + 62)], fill=NAVY + (int(255 * a2),))
+    a3 = ph(t, 1.4)
+    d.line([(160, 790), (920, 790)], fill=(214, 223, 232, int(255 * a3)), width=3)
+    txt(d, 540, 815, "Bizni kuzatishda davom eting —", fn("SemiBold", 40), GREY, a3, "ma")
+    txt(d, 540, 868, "suv haqida suvyektiv fikrlaymiz!", fn("ExtraBold", 46), SKYD, ph(t, 1.9), "ma")
+    txt(d, 540, 950, "Doktor H₂O  ·  @suvyektiv", fn("Bold", 36), NAVY, ph(t, 2.4), "ma")
+    return im
+
 def lower_third(title, sub):
     im = Image.new("RGBA", (W, H)); d = ImageDraw.Draw(im)
     f1, f2 = fn("ExtraBold", 58), fn("SemiBold", 34)
@@ -144,8 +165,9 @@ S = [("Z1", 4.5, 5.0, .33, "lt", ("4 778 litr", "kishi boshiga, har kuni")),
      ("D0", 1.0, 4.5, .50, "lt", ("36% yo'qoladi", "tuproq kanallar va ariqlarda")),
      ("V5", 2.0, 4.0, .50, "lt", ("14 mlrd m³", "har yili yerga singib, bug'lanib")),
      ("T4", 5.0, 2.5, .50, "lt", ("Beton kanallar", "yo'qotishni kamaytiradi")),
-     ("W5", 3.0, 2.0, .62, "lt", ("Zamonaviy sug'orish", "tomchilatib, yomg'irlatib"))]
-SC = {"calc": scene_calc, "tubs": scene_tubs, "rank": scene_rank, "split": scene_split}
+     ("W5", 3.0, 2.0, .62, "lt", ("Zamonaviy sug'orish", "tomchilatib, yomg'irlatib")),
+     ("T0", 12.0, 6.0, .50, "data", "cta")]
+SC = {"cta": scene_cta, "calc": scene_calc, "tubs": scene_tubs, "rank": scene_rank, "split": scene_split}
 
 def gfx():
     import os; os.makedirs(R + "nw", exist_ok=True)
