@@ -22,16 +22,16 @@ def back(u): u = max(0, min(1, u)); c = 1.7; return 1 + (c + 1) * (u - 1) ** 3 +
 
 CAP = {
  "hook": "Kranni ochasiz — suv keladi. Lekin u qayerdan keladi va qanday tozalanadi? Keling, uning yo'lini kuzatamiz.",
- 0: "Toshkent suvining katta qismi Chirchiq daryosidan ajralgan Bo'zsuv kanali orqali Qodiriya suv inshootiga keladi.",
- 1: "Birinchi bosqich — panjara va to'rlar: baliq, suv o'tlari va axlat shu yerda ushlanadi.",
- 2: "Keyin suvga achchiqtosh, ya'ni alyuminiyli koagulyant qo'shiladi. U mayda loyqa zarralarni bir-biriga yopishtiradi.",
- 3: "Og'irlashgan bo'laklar hovuz tubiga cho'kadi. Suzuvchi nasoslar bu loyqani tortib oladi.",
- 4: "Tiniqlashgan suv shag'al va kvars qum qatlamlaridan sekin o'tadi. Filtrlar muntazam yuviladi.",
+ 0: "Hammasi Chorvoq suv omboridan boshlanadi: unga Piskom, Ko'ksuv va Chotqol daryolari quyiladi, sig'imi 2 milliard kub metr.",
+ 1: "Suv Chirchiq daryosi orqali Bo'zsuv inshootiga keladi. U 1932 yilda kuniga 3 800 kub metr bilan boshlagan, bugun esa o'rtacha 1,7 million kub metr suv tozalaydi.",
+ 2: "Panjaradan o'tgan suvga koagulyant qo'shiladi: u mayda loyqa zarralarini bir-biriga yopishtiradi.",
+ 3: "Og'irlashgan bo'laklar tindirgich tubiga cho'kadi va loyqa chiqarib olinadi.",
+ 4: "Keyin suv qum va shag'al qatlamlaridan sekin o'tib, tiniqlashadi.",
  5: "Oxirida xlor qo'shiladi: u bakteriya va viruslarni yo'q qiladi va quvurlarda ham suvni himoya qiladi.",
- 6: "Laboratoriyada suv davlat standarti bo'yicha 40 ta ko'rsatkichga tekshiriladi.",
- 7: "Shu yo'l bilan poytaxtga har kuni 1,8 dan 2,3 million kub metrgacha ichimlik suvi yetkaziladi.",
+ 6: "Laboratoriyada suv sifati har kuni tekshiriladi.",
+ 7: "Poytaxtga kuniga 1,8 dan 2,3 million kub metrgacha suv beriladi. Quvurlardagi bosim esa 700 ga yaqin nuqtadan onlayn kuzatiladi.",
  "cta": "Suvni qadrlang! Suv haqida bilmoqchi bo'lganlaringizni izohlarda yozib qoldiring. Bizni kuzatishda davom eting, suv haqida suvyektiv fikrlaymiz!"}
-DUR = [7.5, 5.5, 7.5, 6.0, 7.0, 7.0, 5.5, 7.0]          # blueprint stations
+DUR = [7.5, 9.0, 6.5, 5.5, 5.5, 6.5, 4.5, 8.5]          # blueprint stations
 HOOK, CTA, XF = 6.0, 6.5, 0.3
 BPT = sum(DUR)
 ST = [sum(DUR[:k]) for k in range(len(DUR))]
@@ -65,7 +65,7 @@ def window(fr, name, box, t, credit=None, zoom=0.07, a=1.0):
     fr.paste(sub, (x0, y0), m)
     d = ImageDraw.Draw(fr); d.rounded_rectangle([x0, y0, x1, y1], 26, outline=NAVY + (int(255 * a),), width=4)
     if credit:
-        d.text((x1 - 16, y1 - 16), "Foto: " + credit, font=fn("SemiBold", 22), fill=WHITE + (int(230 * a),), anchor="rd", stroke_width=2, stroke_fill=(0, 0, 0, 120))
+        d.text((x0 + 18, y1 - 16), "Foto: " + credit, font=fn("SemiBold", 22), fill=WHITE + (int(230 * a),), anchor="ld", stroke_width=2, stroke_fill=(0, 0, 0, 120))
 
 def chip(d, x, y, s, a, col=NAVY, fg=WHITE, size=40):
     if a <= 0: return 0
@@ -79,7 +79,8 @@ def label(d, x, y, s, f, col, a=1.0, anchor="la"):
     d.text((x, y + (1 - a) * 18), s, font=f, fill=col + (int(255 * a),), anchor=anchor)
 
 # ---------- station drawers (y0 = screen y of station top; t = local time since station became active, may be <0) ----------
-TITLES = ["MANBA", "PANJARA", "KOAGULYATSIYA", "CHO'KTIRISH", "FILTRLASH", "XLORLASH", "LABORATORIYA", "SHAHARGA"]
+TITLES = ["MANBA", "BO'ZSUV INSHOOTI", "KOAGULYATSIYA", "TINDIRISH", "FILTRLASH", "XLORLASH", "LABORATORIYA", "SHAHARGA"]
+CR = "UzA / M. Xo'jayev"
 def node(d, k, y0, active):
     cy = y0 + 44
     d.ellipse([PX - 46, cy - 46, PX + 46, cy + 46], fill=(SKYD if active else WHITE) + (255,), outline=NAVY + (255,), width=5)
@@ -91,115 +92,99 @@ def head(d, k, y0, t):
 
 def st0(fr, d, y0, t):
     head(d, 0, y0, t)
-    window(fr, "river", (190, y0 + 130, 1010, y0 + 600), t, None, a=ph(t, 0.2))
-    window(fr, "canal", (590, y0 + 560, 1010, y0 + 860), t, "Fergana.agency", a=ph(t, 2.4))
-    label(d, 200, y0 + 640, "Chirchiq daryosi", fn("ExtraBold", 40), NAVY, ph(t, 1.0))
-    label(d, 200, y0 + 700, "↓ Bo'zsuv kanali", fn("Bold", 36), SKYD, ph(t, 2.0))
-    label(d, 200, y0 + 750, "↓ Qodiriya", fn("Bold", 36), SKYD, ph(t, 3.2))
+    window(fr, "u_chorvoq", (190, y0 + 130, 1010, y0 + 680), t, CR, a=ph(t, 0.2))
+    label(d, 200, y0 + 710, "Chorvoq suv ombori", fn("ExtraBold", 44), NAVY, ph(t, 0.8))
+    label(d, 200, y0 + 770, "Piskom + Ko'ksuv + Chotqol", fn("Bold", 34), SKYD, ph(t, 1.6))
+    chip(d, 200, y0 + 1060, "sig'imi ≈ 2 mlrd m³", ph(t, 3.0), SKYD)
 
 def st1(fr, d, y0, t):
     head(d, 1, y0, t)
-    window(fr, "intake", (190, y0 + 130, 1010, y0 + 680), t, "Fergana.agency", a=ph(t, 0.2))
-    # grate graphic: bars that "catch" items
-    a = ph(t, 1.2)
-    if a > 0:
-        gx, gy = 200, y0 + 720
-        for i in range(9): d.line([(gx + i * 34, gy), (gx + i * 34, gy + 110)], fill=NAVY + (int(255 * a),), width=6)
-        label(d, 520, gy + 4, "× baliq", fn("Bold", 36), WARN, ph(t, 1.6))
-        label(d, 520, gy + 44, "× suv o'tlari", fn("Bold", 36), WARN, ph(t, 2.0))
-        label(d, 520, gy + 84, "× axlat", fn("Bold", 36), WARN, ph(t, 2.4))
+    window(fr, "u_bozsuv", (190, y0 + 130, 1010, y0 + 640), t, CR, a=ph(t, 0.2))
+    label(d, 200, y0 + 670, "1932", fn("Black", 64), INK2, ph(t, 2.0))
+    label(d, 200, y0 + 740, "3 800 m³/kun", fn("Bold", 36), INK2, ph(t, 2.4))
+    u = ph(t, 4.2, 2.0); v = 3800 + (1_700_000 - 3800) * u
+    label(d, 560, y0 + 670, "bugun", fn("Black", 64), SKYD, ph(t, 4.0))
+    label(d, 560, y0 + 740, (f"{v/1e6:.1f} mln".replace(".", ",") if v > 1e5 else f"{int(v):,}".replace(",", " ")) + " m³/kun", fn("ExtraBold", 40), SKYD, ph(t, 4.0))
+    label(d, 470, y0 + 690, "→", fn("Black", 64), WARN, ph(t, 3.6))
 
 def st2(fr, d, y0, t):
     head(d, 2, y0, t)
-    window(fr, "dredge", (190, y0 + 130, 1010, y0 + 620), t, "Fergana.agency", a=ph(t, 0.2))
-    # particles clumping: 18 dots drift together into 3 flocs
-    a = ph(t, 1.5); box = (200, y0 + 660, 1000, y0 + 870)
+    window(fr, "u_tank", (190, y0 + 130, 1010, y0 + 620), t, CR, a=ph(t, 0.2))
+    a = ph(t, 1.2); box = (200, y0 + 660, 1000, y0 + 870)
     if a > 0:
         d.rounded_rectangle(box, 22, fill=WHITE + (int(235 * a),), outline=SKYD + (int(255 * a),), width=3)
-        u = ease((t - 2.3) / 2.2); import random; rnd = random.Random(5)
+        u = ease((t - 1.8) / 2.2); import random; rnd = random.Random(5)
         cents = [(330, y0 + 775), (600, y0 + 775), (870, y0 + 775)]
         for i in range(24):
             cx, cy = cents[i % 3]; sx, sy = rnd.uniform(220, 980), rnd.uniform(y0 + 710, y0 + 850)
             jx, jy = rnd.uniform(-22, 22), rnd.uniform(-18, 18)
-            x, y = sx + (cx + jx - sx) * u, sy + (cy + jy - sy) * u
-            r = 7 + 3 * u
+            x, y = sx + (cx + jx - sx) * u, sy + (cy + jy - sy) * u; r = 7 + 3 * u
             d.ellipse([x - r, y - r, x + r, y + r], fill=(150, 120, 80, int(255 * a)))
         label(d, 220, y0 + 672, "loyqa zarralari", fn("SemiBold", 26), INK2, a * (1 - u))
-        label(d, 220, y0 + 672, "yirik bo'laklar (flokulalar)", fn("SemiBold", 26), INK2, u)
-    chip(d, 200, y0 + 1060, "+ achchiqtosh (Al³⁺ koagulyant)", ph(t, 1.0), SKYD)
+        label(d, 220, y0 + 672, "yirik bo'laklar", fn("SemiBold", 26), INK2, u)
+    chip(d, 200, y0 + 1060, "+ koagulyant", ph(t, 0.8), SKYD)
 
 def st3(fr, d, y0, t):
     head(d, 3, y0, t)
-    window(fr, "pond", (190, y0 + 130, 1010, y0 + 620), t, "Fergana.agency", a=ph(t, 0.2))
-    a = ph(t, 1.2); bx0, by0, bx1, by1 = 200, y0 + 660, 1000, y0 + 870
+    window(fr, "u_dredge", (190, y0 + 130, 1010, y0 + 620), t, CR, a=ph(t, 0.2))
+    a = ph(t, 0.9); bx0, by0, bx1, by1 = 200, y0 + 660, 1000, y0 + 870
     if a > 0:
         d.rounded_rectangle([bx0, by0, bx1, by1], 22, fill=(206, 233, 250, int(255 * a)), outline=SKYD + (255,), width=3)
-        u = ease((t - 1.6) / 2.6)
-        import random; rnd = random.Random(9)
+        u = ease((t - 1.2) / 2.4); import random; rnd = random.Random(9)
         for i in range(26):
-            x = rnd.uniform(bx0 + 20, bx1 - 20); ys = rnd.uniform(by0 + 20, by1 - 70)
-            y = ys + (by1 - 22 - ys) * u
+            x = rnd.uniform(bx0 + 20, bx1 - 20); ys = rnd.uniform(by0 + 20, by1 - 70); y = ys + (by1 - 22 - ys) * u
             d.ellipse([x - 8, y - 8, x + 8, y + 8], fill=(150, 120, 80, int(255 * a)))
         d.rectangle([bx0 + 6, by1 - 18 * u - 6, bx1 - 6, by1 - 6], fill=(150, 120, 80, int(200 * a)))
-        label(d, bx1 - 20, by0 + 14, "tiniq suv ↑", fn("Bold", 30), SKYD, ph(t, 3.6), "ra")
-        label(d, bx0 + 20, by0 + 14, "loyqa ↓", fn("Bold", 30), (130, 95, 50), ph(t, 2.2))
+        label(d, bx1 - 20, by0 + 14, "tiniq suv ↑", fn("Bold", 30), SKYD, ph(t, 3.2), "ra")
+        label(d, bx0 + 20, by0 + 14, "loyqa ↓", fn("Bold", 30), (130, 95, 50), ph(t, 1.6))
 
 def st4(fr, d, y0, t):
     head(d, 4, y0, t)
-    window(fr, "filters", (190, y0 + 130, 1010, y0 + 640), t, "Fergana.agency", a=ph(t, 0.2))
-    layers = [("suv", (206, 233, 250), 1.2), ("kvars qum", (232, 214, 170), 1.8), ("mayda shag'al", (196, 182, 160), 2.4), ("shag'al", (160, 150, 140), 3.0)]
-    y = y0 + 680
-    for s, col, t0 in layers:
+    window(fr, "u_sand", (190, y0 + 130, 1010, y0 + 560), t, CR, a=ph(t, 0.2))
+    window(fr, "u_fhall", (560, y0 + 500, 1010, y0 + 800), t, None, a=ph(t, 2.6))
+    layers = [("suv", (206, 233, 250), 0.9), ("qum", (232, 214, 170), 1.3), ("mayda shag'al", (196, 182, 160), 1.7), ("shag'al", (160, 150, 140), 2.1)]
+    y = y0 + 600
+    for s_, col, t0 in layers:
         a = ph(t, t0)
         if a <= 0: break
-        d.rectangle([200, y, 200 + 800 * a, y + 44], fill=col + (255,), outline=NAVY + (255,), width=2)
-        label(d, 220, y + 6, s, fn("Bold", 28), NAVY, a)
+        d.rectangle([200, y, 200 + 330 * a, y + 44], fill=col + (255,), outline=NAVY + (255,), width=2)
+        label(d, 216, y + 6, s_, fn("Bold", 26), NAVY, a)
         y += 46
-    # droplets running through
-    if t > 3.4:
-        for i in range(6):
-            yy = y0 + 680 + ((t * 120 + i * 33) % 184)
-            d.ellipse([870 - 7, yy - 9, 870 + 7, yy + 9], fill=SKYD + (255,))
 
 def st5(fr, d, y0, t):
     head(d, 5, y0, t)
     a = ph(t, 0.2)
-    if a > 0:   # no photo: big Cl2 molecule on a card
+    if a > 0:
         d.rounded_rectangle([190, y0 + 130, 1010, y0 + 560], 26, fill=WHITE + (int(250 * a),), outline=NAVY + (255,), width=4)
-        s = back(min(1, max(0, (t - 0.2) / 0.7)))
+        s_ = back(min(1, max(0, (t - 0.2) / 0.7)))
         for cx in (490, 710):
-            r = 92 * s
+            r = 92 * s_
             d.ellipse([cx - r, y0 + 330 - r, cx + r, y0 + 330 + r], fill=(196, 236, 160, 255), outline=NAVY + (255,), width=6)
-            d.text((cx, y0 + 330), "Cl", font=fn("Black", int(70 * max(0.1, s))), fill=NAVY + (255,), anchor="mm")
+            d.text((cx, y0 + 330), "Cl", font=fn("Black", int(70 * max(0.1, s_))), fill=NAVY + (255,), anchor="mm")
         label(d, 600, y0 + 470, "xlor · Cl₂", fn("ExtraBold", 40), NAVY, ph(t, 0.8), "ma")
-    label(d, 200, y0 + 610, "× bakteriyalar", fn("ExtraBold", 44), WARN, ph(t, 1.8))
-    label(d, 200, y0 + 670, "× viruslar", fn("ExtraBold", 44), WARN, ph(t, 2.4))
-    chip(d, 200, y0 + 1060, "qoldiq xlor quvurda ham himoya qiladi", ph(t, 3.6), OK, size=36)
+    label(d, 200, y0 + 610, "× bakteriyalar", fn("ExtraBold", 44), WARN, ph(t, 1.6))
+    label(d, 200, y0 + 670, "× viruslar", fn("ExtraBold", 44), WARN, ph(t, 2.2))
+    chip(d, 200, y0 + 1060, "qoldiq xlor quvurda ham himoya qiladi", ph(t, 3.2), OK, size=36)
 
 def st6(fr, d, y0, t):
     head(d, 6, y0, t)
-    window(fr, "lab", (190, y0 + 130, 1010, y0 + 680), t, "Fergana.agency", a=ph(t, 0.2))
-    n = int(40 * ph(t, 1.0, 1.6))
-    label(d, 200, y0 + 710, f"{n}", fn("Black", 120), SKYD, ph(t, 0.8))
-    label(d, 370, y0 + 736, "ta ko'rsatkich", fn("ExtraBold", 48), NAVY, ph(t, 1.2))
-    label(d, 370, y0 + 796, "O'zDSt 951-2011", fn("Bold", 32), INK2, ph(t, 1.8))
+    window(fr, "u_micro", (190, y0 + 130, 1010, y0 + 620), t, CR, a=ph(t, 0.2))
+    window(fr, "u_flask", (600, y0 + 560, 1010, y0 + 840), t, None, a=ph(t, 1.6))
+    label(d, 200, y0 + 680, "har kuni", fn("Black", 60), SKYD, ph(t, 1.0))
+    label(d, 200, y0 + 760, "sifat nazorati", fn("Bold", 36), NAVY, ph(t, 1.4))
 
 def st7(fr, d, y0, t):
     head(d, 7, y0, t)
     a = ph(t, 0.2)
     if a > 0:
-        d.rounded_rectangle([190, y0 + 130, 1010, y0 + 620], 26, fill=WHITE + (int(250 * a),), outline=NAVY + (255,), width=4)
-        v = 1.8 + 0.5 * ph(t, 1.2, 1.6)
-        label(d, 600, y0 + 170, "har kuni", fn("Bold", 40), INK2, a, "ma")
-        label(d, 600, y0 + 230, f"{v:.1f}".replace(".", ",") + " mln m³", fn("Black", 110), SKYD, a, "ma")
-        label(d, 600, y0 + 380, "(mavsumga qarab 1,8–2,3 mln)", fn("SemiBold", 30), INK2, ph(t, 1.6), "ma")
-        b = ph(t, 3.0)
-        if b > 0:
-            for i in range(12):        # pool icons
-                x = 260 + (i % 6) * 120; y = y0 + 450 + (i // 6) * 70
-                d.rounded_rectangle([x, y, x + 100, y + 52], 10, fill=SKY + (int(255 * ph(t, 3.0 + i * 0.06, 0.3)),), outline=NAVY + (255,), width=2)
-            label(d, 600, y0 + 640, "≈ 900 ta olimpiya basseyni", fn("ExtraBold", 44), NAVY, ph(t, 3.8), "ma")
-    label(d, 200, y0 + 1060, "Manba: UzA (2023), Fergana.agency (2020)", fn("Medium", 26), INK2, ph(t, 1.0))
+        d.rounded_rectangle([190, y0 + 130, 1010, y0 + 470], 26, fill=WHITE + (int(250 * a),), outline=NAVY + (255,), width=4)
+        v = 1.8 + 0.5 * ph(t, 1.0, 1.6)
+        label(d, 600, y0 + 160, "har kuni", fn("Bold", 38), INK2, a, "ma")
+        label(d, 600, y0 + 215, f"{v:.1f}".replace(".", ",") + " mln m³", fn("Black", 110), SKYD, a, "ma")
+        label(d, 600, y0 + 360, "(mavsumga qarab 1,8–2,3 mln)", fn("SemiBold", 30), INK2, ph(t, 1.4), "ma")
+    window(fr, "u_dispatch", (190, y0 + 500, 1010, y0 + 880), t, CR, a=ph(t, 3.6))
+    chip(d, 200, y0 + 1060, "≈ 700 nuqtada bosim onlayn kuzatiladi", ph(t, 4.4), SKYD, size=36)
+    label(d, 200, y0 + 1160, "Manba: UzA (2023, 2025)", fn("Medium", 26), INK2, ph(t, 1.0))
 
 STATIONS = [st0, st1, st2, st3, st4, st5, st6, st7]
 
@@ -294,7 +279,7 @@ def timeline():
 
 def caps():
     import news
-    news.KEY = re.compile(r"\d|%|chirchiq|bo'zsuv|qodiriya|panjara|koagulyant|achchiqtosh|qum|xlor|laboratoriya|suvyektiv|qadrlang", re.I)
+    news.KEY = re.compile(r"\d|%|chorvoq|chirchiq|bo'zsuv|koagulyant|qum|xlor|laboratoriya|suvyektiv|qadrlang", re.I)
     news.caps_render([(a + 0.12, b - 0.12, s) for a, b, s in timeline()], HOOK + BPT + CTA, R + "seg/caps.mov")
 
 def build(out, use_caps=True):

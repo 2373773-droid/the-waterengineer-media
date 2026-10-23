@@ -5,7 +5,7 @@ from scipy.io import wavfile
 from scipy.signal import butter, sosfilt
 SR = 48000; DUR = 66.0; n = int(SR * DUR); b = 60 / 104
 L = np.zeros(n); R = np.zeros(n); rng = np.random.default_rng(7)
-M = dict(plant=6.0, h2s=13.5, nose=19.0, turn=26.5, case=32.5, fix=39.5, verdict=52.0, cta=59.0)
+M = dict(plant=6.0, h2s=13.5, nose=22.5, turn=29.0, case=34.5, fix=51.0, verdict=55.0, cta=59.5)
 f = lambda k: 440 * 2 ** ((k - 66) / 12)
 def put(s, t, g, pan=0.0):
     i = int(t * SR)
