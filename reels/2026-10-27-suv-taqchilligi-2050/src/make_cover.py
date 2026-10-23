@@ -21,12 +21,12 @@ for y in range(H):
 im.alpha_composite(g)
 
 # person bust
-cut = Image.open(D + "cut.png").convert("RGBA").crop((360, 740, 1040, 1380))
-sc = 1.55; cut = cut.resize((int(cut.width * sc), int(cut.height * sc)), Image.LANCZOS)
+cut = Image.open(D + "cut.png").convert("RGBA").crop((400, 790, 1000, 1330))
+sc = 1.8; cut = cut.resize((int(cut.width * sc), int(cut.height * sc)), Image.LANCZOS)
 m = np.array(cut.getchannel("A")).astype(np.float32)
 fade = np.clip((cut.height - np.arange(cut.height)) / 160, 0, 1)[:, None]      # soft bottom edge
 cut.putalpha(Image.fromarray((m * fade).astype(np.uint8)))
-px, py = (W - cut.width) // 2 + 40, H - cut.height + 10
+px, py = (W - cut.width) // 2, H - cut.height + 10
 glow = Image.new("RGBA", (W, H)); gl = Image.new("RGBA", cut.size, SKY + (0,)); gl.putalpha(cut.getchannel("A"))
 glow.alpha_composite(gl, (px, py)); glow = glow.filter(ImageFilter.GaussianBlur(26))
 glow.putalpha(glow.getchannel("A").point(lambda v: int(v * 0.85)))
@@ -44,9 +44,9 @@ d.ellipse([990, 197, 1008, 215], fill=SKY + (255,))
 text(68, 250, "2050", fn("Black", 300), WHITE)
 text(80, 585, "suv taqchilligi", fn("ExtraBold", 92), WHITE)
 # ×5 badge
-f = fn("Black", 120); w = d.textlength("5 barobar?", font=f)
+f = fn("Black", 120); w = d.textlength("5 barobar?!", font=f)
 d.rounded_rectangle([70, 700, 70 + w + 60, 860], 24, fill=SKY + (255,))
-d.text((100, 712), "5 barobar?", font=f, fill=(11, 31, 51))
+d.text((100, 712), "5 barobar?!", font=f, fill=(11, 31, 51))
 d.text((80, 885), "Jahon banki prognozi", font=fn("SemiBold", 40), fill=(230, 238, 245, 240))
 im.convert("RGB").save(D + "cover_2050.jpg", quality=93)
 im.convert("RGB").resize((360, 640)).save(D + "cover_small.jpg")
