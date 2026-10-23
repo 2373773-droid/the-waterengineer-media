@@ -148,32 +148,38 @@ def tubs(im, t):
 render("sk_tubs", 5.0, tubs)
 
 # ---------- C: neighbours bar chart, drawn with marker ----------
-DATA = [("Turkmaniston", 15445), ("O'zbekiston", 4778), ("Tojikiston", 4460), ("Qirg'iziston", 4153), ("Qozog'iston", 3397)]
+DATA = [("Turkmaniston", 15445), ("Chili", 5880), ("Gayana", 5284), ("O'zbekiston", 4778), ("Tojikiston", 4460),
+        ("Qirg'iziston", 4153), ("Eron", 3638), ("Estoniya", 3585), ("Ozarbayjon", 3512), ("Sharqiy Timor", 3456)]
+CA = {"Turkmaniston", "Tojikiston", "Qirg'iziston"}
 def rank(im, t):
     d = ImageDraw.Draw(im, "RGBA")
-    write(im, 0, 130, "Kishi boshiga, litr / kun", cav(80), INK, ph(t, 0, 0.7), t, 1, center=True, rot=-1)
-    x0, y, maxw, bh, gap = 150, 300, 640, 74, 72
-    stroke(d, [(x0 - 10, y - 30), (x0 - 14, y + 5 * (bh + gap) - 40)], INK, 6, t, 2, ph(t, 0.4, 0.4))
+    write(im, 0, 125, "TOP-10: kishi boshiga suv sarfi", cav(74), INK, ph(t, 0, 0.7), t, 1, center=True, rot=-1)
+    write(im, 0, 215, "litr / kun · Worldometer (BMT, FAO) · ma'lumot yillari har xil", pat(30), GREY, ph(t, 0.3, 0.4), t, 2, center=True)
+    x0, xb, y, row, bh, maxw = 120, 430, 300, 74, 36, 420
+    stroke(d, [(xb - 8, y - 12), (xb - 12, y + 10 * row - 20)], INK, 5, t, 3, ph(t, 0.4, 0.4))
     for i, (name, v) in enumerate(DATA):
-        t0 = 0.6 + i * 0.4; L = maxw * v / 15445 * ph(t, t0, 0.8)
-        yb = y + i * (bh + gap)
-        write(im, x0, yb - 64, name, pat(40), INK, ph(t, t0, 0.3), t, 10 + i)
-        col = RED if name == "O'zbekiston" else BLUE
+        t0 = 0.6 + i * 0.32; yb = y + i * row
+        uz = name == "O'zbekiston"
+        col = RED if uz else (BLUE if name in CA else INK)
+        if uz and t > 4.2:
+            highlight(im, x0 - 10, yb - 8, xb - 20, yb + bh + 8, ph(t, 4.2, 0.4), t, 70)
+            d = ImageDraw.Draw(im, "RGBA")
+        write(im, x0, yb - 14, f"{i + 1}. {name}", pat(40), col, ph(t, t0, 0.3), t, 10 + i)
+        L = maxw * v / 15445 * ph(t, t0 + 0.1, 0.6)
         if L > 4:
-            hatch(d, x0, yb, x0 + L, yb + bh * 0.62, col, 1, t, 20 + i, gap=13, w=6, alpha=170)
-            stroke(d, [(x0, yb), (x0 + L, yb), (x0 + L, yb + bh * 0.62), (x0, yb + bh * 0.62)], col, 4, t, 30 + i, amp=1.6)
-            write(im, x0 + L + 18, yb - 14, fmt(v * ph(t, t0, 0.8)), cav(64), col, 1, t, 40 + i)
-    if t > 3.4:
-        highlight(im, x0 - 6, y + (bh + gap) - 60, x0 + 230, y + (bh + gap) - 14, ph(t, 3.4, 0.4), t, 50)
-        d = ImageDraw.Draw(im, "RGBA")
-        ax, ay = 520, y + (bh + gap) + 10
-        stroke(d, [(ax + 200, ay + 110), (ax + 90, ay + 70), (ax + 10, ay + 14)], RED, 6, t, 51, ph(t, 3.6, 0.4))
-        stroke(d, [(ax + 10, ay + 14), (ax + 40, ay + 2)], RED, 6, t, 52, ph(t, 3.95, 0.15))
-        stroke(d, [(ax + 10, ay + 14), (ax + 34, ay + 36)], RED, 6, t, 53, ph(t, 3.95, 0.15))
-        write(im, ax + 150, ay + 110, "dunyoda 4-o'rin!", cav(60), RED, ph(t, 4.1, 0.5), t, 54, rot=-4)
-        write(im, 830, y - 70, "1-o'rin", cav(52), BLUE, ph(t, 4.4, 0.4), t, 55, rot=-3)
-    write(im, 0, 1030, "Worldometer (BMT, FAO) · Times of Central Asia, 2026", pat(32), GREY, ph(t, 4.6, 0.4), t, 60, center=True)
-render("sk_rank", 6.0, rank)
+            hatch(d, xb, yb, xb + L, yb + bh, col, 1, t, 20 + i, gap=12, w=5, alpha=160)
+            stroke(d, [(xb, yb), (xb + L, yb), (xb + L, yb + bh), (xb, yb + bh)], col, 4, t, 30 + i, amp=1.4)
+            write(im, xb + L + 14, yb - 16, fmt(v * ph(t, t0 + 0.1, 0.6)), cav(50), col, 1, t, 40 + i)
+    if t > 4.4:
+        ay = y + 3 * row + bh / 2
+        stroke(d, [(1010, ay + 130), (900, ay + 90), (790, ay + 8)], RED, 6, t, 51, ph(t, 4.4, 0.4))
+        stroke(d, [(790, ay + 8), (826, ay + 4)], RED, 6, t, 52, ph(t, 4.75, 0.15))
+        stroke(d, [(790, ay + 8), (812, ay + 38)], RED, 6, t, 53, ph(t, 4.75, 0.15))
+        write(im, 700, ay + 120, "biz 4-o'rindamiz!", cav(56), RED, ph(t, 4.9, 0.5), t, 54, rot=-5)
+    if t > 5.3:
+        write(im, 640, y - 70 + 4, "Markaziy Osiyo: 3 ta qo'shni ham bor", pat(30), BLUE, ph(t, 5.3, 0.5), t, 56) if False else None
+        write(im, 0, 1035, "ko'k = Markaziy Osiyodagi qo'shnilarimiz", pat(34), BLUE, ph(t, 5.4, 0.5), t, 57, center=True)
+render("sk_rank", 7.5, rank)
 
 # ---------- D: measuring cylinder 4 778 L → farms → leaks ----------
 def split(im, t):
