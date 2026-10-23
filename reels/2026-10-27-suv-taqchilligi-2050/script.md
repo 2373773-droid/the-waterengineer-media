@@ -13,7 +13,7 @@ Reel: Seshanba 2026-10-27, 16:00 Seul. Uslub: "vaqt chizig'i hujjatli film" — 
 | 7 | 04 MUZLIKLAR (74%) | Amudaryo suvining qariyb 74 foizi qor va muzliklar erishidan keladi, muzliklar esa qisqarmoqda. | 26.0–32.5 |
 | 8 | 05 YER OSTI SUVI (o'lchov) | Yer osti suvi ham pasaymoqda: Quyi Chirchiqdagi kuzatuv qudug'ida sath 2014 yildagi 2,15 metrdan 5,38 metrga tushgan. | 32.5–39.5 |
 | 9 | 06 YECHIM | Suvning 90 foizi qishloq xo'jaligida. Jahon banki bilan sug'orishni yangilash loyihasi har yili 540 million kub metr suvni tejashni ko'zlaydi. | 39.5–47.5 |
-| 10 | JAVOHIR + CTA | Suv haqida yana nimalarni bilmoqchisiz? Izohlarda yozib qoldiring. Bizni kuzatishda davom eting, suv haqida suvyektiv fikrlaymiz! | 47.5–53.5 |
+| 10 | JAVOHIR + CTA | Suvni tejang! Suv haqida bilmoqchi bo'lganlaringizni izohlarda yozib qoldiring. Bizni kuzatishda davom eting, suv haqida suvyektiv fikrlaymiz! | 47.5–53.5 |
 
 ## Raqamlar va manbalar
 - Talab 59 → 62–63 km³/yil, mavjud suv 57 → 52–53 km³/yil, taqchillik 2 → 11–12 km³ (2050): Jahon banki tahlili, O'zsuvta'minot bosh mutaxassisi A. Muhammadaliyev — Kun.uz, 16.04.2022. 11/2 = 5,5; 12/2 = 6 → "besh barobardan ko'proq".
@@ -29,7 +29,7 @@ Jahon banki tahliliga ko'ra, O'zbekistonda suvga talab o'sib, mavjud suv kamayib
 
 Yaxshi xabar: suvning eng katta qismi sug'orishga ketgani uchun eng katta tejash imkoniyati ham shu yerda.
 
-Suv haqida yana nimalarni bilmoqchisiz? Izohlarda yozib qoldiring 👇
+Suvni tejang! Suv haqida bilmoqchi bo'lganlaringizni izohlarda yozib qoldiring 👇
 
 Manba: Jahon banki; O'zsuvta'minot (Kun.uz, 2022); ICIMOD (2025).
 
@@ -37,3 +37,6 @@ Manba: Jahon banki; O'zsuvta'minot (Kun.uz, 2022); ICIMOD (2025).
 
 ## B-roll (Pixabay, real footage)
 326934 (qum soati), 176671 (quruq tog'lar), 89835 (qurigan daryo), 3630 (olomon), 376 (eriyotgan muzlik), 28379 (quduq), 44765 (sug'orish), 216058 (daryo, havodan).
+
+## Muqova
+cover_2050.jpg — qurigan daryo kadri + Javohir (21-soniyadagi kadrdan kesilgan), "2050 · suv taqchilligi · 5 barobar?". Profil to'rida 3:4 kesimda ham matn va yuz ko'rinadi.

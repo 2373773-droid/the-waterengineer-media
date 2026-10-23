@@ -159,15 +159,15 @@ def fix(d, t, im):
     src(d, "Manba: Jahon banki, 2025", t, 1.0)
 
 def cta(d, t, im):
-    text(d, 80, 420, "Suv haqida yana", fn("ExtraBold", 68), WHITE, ph(t, 0))
-    text(d, 80, 505, "nimalarni bilmoqchisiz?", fn("ExtraBold", 68), WHITE, ph(t, 0.2))
-    a = ph(t, 0.7)
-    w = d.textlength("Izohlarda yozib qoldiring ↓", font=fn("Bold", 46)) + 60
-    d.rounded_rectangle([80, 630, 80 + w, 712], 41, fill=SKY + (int(255 * a),))
-    text(d, 110, 645, "Izohlarda yozib qoldiring ↓", fn("Bold", 46), NAVY, a, shadow=False)
-    text(d, 80, 800, "Bizni kuzatishda davom eting —", fn("SemiBold", 42), WHITE, ph(t, 1.4))
-    text(d, 80, 856, "suv haqida suvyektiv fikrlaymiz!", fn("ExtraBold", 52), SKY, ph(t, 1.9))
-    text(d, 80, 960, "Doktor H₂O  ·  @suvyektiv", fn("Bold", 40), WHITE, ph(t, 2.4))
+    text(d, 80, 400, "Suvni tejang!", fn("Black", 120), SKY, ph(t, 0))
+    text(d, 80, 560, "Suv haqida bilmoqchi bo'lganlaringizni", fn("Bold", 42), WHITE, ph(t, 0.6))
+    a = ph(t, 0.9)
+    w = d.textlength("izohlarda yozib qoldiring ↓", font=fn("Bold", 46)) + 60
+    d.rounded_rectangle([80, 625, 80 + w, 707], 41, fill=SKY + (int(255 * a),))
+    text(d, 110, 640, "izohlarda yozib qoldiring ↓", fn("Bold", 46), NAVY, a, shadow=False)
+    text(d, 80, 800, "Bizni kuzatishda davom eting —", fn("SemiBold", 42), WHITE, ph(t, 1.6))
+    text(d, 80, 856, "suv haqida suvyektiv fikrlaymiz!", fn("ExtraBold", 52), SKY, ph(t, 2.1))
+    text(d, 80, 960, "Doktor H₂O  ·  @suvyektiv", fn("Bold", 40), WHITE, ph(t, 2.6))
 
 SC = {k: v for k, v in globals().items() if k in {s[5] for s in S}}
 
